@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-echo $@
-
-echo $#
 if [[ $# -eq 1 ]]; then
     mdx-deck decks/"$1".mdx
 elif [[ $# -eq 2 ]]; then
