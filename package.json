@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "description": "The decks of our lightning talks at farbenmeer",
+  "scripts": {
+    "start": "./run",
+    "build": "./run build",
+    "pdf": "./run pdf",
+    "image": "./run screenshot",
+    "help": "mdx-deck"
+  },
+  "keywords": [],
+  "author": "Max Struebing",
+  "license": "MIT",
+  "devDependencies": {
+    "mdx-deck": "^1.6.7"
+  },
+  "name": "mdx-decks"
+}
