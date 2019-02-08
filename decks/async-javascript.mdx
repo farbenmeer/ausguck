@@ -1,0 +1,325 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Async Javascript</title>
+</Head>
+
+# Async Javascript
+by Henrik Wenz
+
+---
+
+## Asynchrony, in computer programming, refers to the occurrence of events independent of the main program flow and ways to deal with such events.
+
+---
+
+## Callbacks
+
+```js
+console.log('foo')
+setTimeout(() => {
+  console.log('bar')
+})
+console.log('baz')
+```
+
+---
+
+## Callbacks - Conventions (node.js)
+
+```js
+const callback = (error, result) => {
+  if (error) {
+    // Handle error
+    return
+  }
+  // Handle result
+}
+doSomethingAsync(param1, callback)
+```
+
+---
+
+
+## Callbacks - Conventions (node.js)
+
+```js
+const fs = require('fs')
+fs.readFile('/etc/passwd', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+```
+
+---
+
+Asynchronous JavaScript, or JavaScript that uses callbacks, is hard to get right intuitively. A lot of code ends up looking like this:
+
+```js
+setTimeout(() => {
+  console.log('1sec passed')
+  setTimeout(() => {
+    console.log('2sec passed')
+    setTimeout(() => {
+      console.log('3sec passed')
+      setTimeout(() => {
+        console.log('4sec passed')
+        setTimeout(() => {
+          console.log('4sec passed')
+        }, 1000)
+      }, 1000)
+    }, 1000)
+  }, 1000)
+}, 1000)
+```
+
+---
+
+# Promises were introduced to help!
+
+---
+
+# The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.
+
+---
+
+## Creating a promise
+
+```js
+const myPromise = new Promise(function(resolve, reject) {
+
+});
+
+// => { /* promise object */ }
+```
+
+---
+
+## Resolving a promise
+
+```js
+const myPromise = new Promise(function(resolve, reject) {
+  resolve('fooo')
+});
+
+myPromise.then((result) => {
+  console.log(result)
+})
+
+```
+
+---
+
+## Rejecting a promise
+
+```js
+const myPromise = new Promise(function(resolve, reject) {
+  reject(new Error('omg something went wrong'))
+});
+
+myPromise.catch((error) => {
+  console.log('error')
+})
+
+// => { /* promise object */ }
+```
+
+---
+
+## Converting a callback function to an promise (async) function
+
+```js
+const fs = require('fs')
+fs.readFile('/etc/passwd', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+```
+
+---
+
+## Converting a callback function to an promise (async) function
+
+```js
+const fs = require('fs')
+
+function readFileAsync(argument) {
+  return new Promise((resolve, reject) => {
+    fs.readFile('/etc/passwd', (err, data) => {
+      if (err) {
+        return reject(error)
+      } else {
+        return resolve(data)
+      }
+    });
+  })
+}
+
+readFileAsync('./somepath')
+  .then((data) => {
+    console.log(data)
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+```
+---
+## promisify
+
+```js
+function promisify (targetFunc) {
+  return (...args) => {
+    return new Promise((resolve, reject) => {
+      targetFunc(...args, (error, result) => {
+        if (error) {
+          error(error)
+        }
+        resolve(result)
+      })
+    })
+  }
+
+```
+
+---
+
+# Why are promises better than callbacks?????
+
+---
+
+## Promises flatten itself
+
+```js
+Promise.resolve().then(() => {
+  return Promise.resolve().then(() => {
+    return 'foo'
+  })
+})
+
+// => 'foo'
+```
+
+---
+
+## Async Await
+
+```js
+async function foo () {
+  return 'foo'
+}
+```
+
+same as
+
+```js
+function foo () {
+  return new Promise((resolve, reject) => {
+    resolve('foo')
+  })
+}
+```
+
+---
+
+## Implementing a sleep function
+
+```js
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, ms)
+  })
+}
+```
+
+---
+
+## Using a sleep function
+
+```js
+(async () => {
+  console.log('1sec passed')
+  await sleep(1000)
+  console.log('2sec passed')
+  await sleep(1000)
+  console.log('3sec passed')
+  await sleep(1000)
+  console.log('4sec passed')
+  await sleep(1000)
+  console.log('5sec passed')
+  await sleep(1000)
+})()
+```
+
+---
+
+## Concurrency with async await
+
+```js
+(async () => {
+  await Promise.all([
+    someAsyncTask(),
+    someAsyncTask(),
+    someAsyncTask(),
+    someAsyncTask()
+  ])()
+  console.log('done')
+})
+```
+
+---
+
+## Good to know
+
+```js
+const {promisify} = require('util');
+const fs = require('fs');
+const readFileAsync = promisify(fs.readFile);
+
+(async () => {
+  try {
+    var data = await readFileAsync('./path', 'utf8')
+  } catch (error) {
+    console.error(error)
+  }
+
+  console.log(data)
+})()
+```
+
+---
+
+## Future
+
+```js
+const fs = require('fs')
+
+(async () => {
+  var data = await fs.promise.readFile('./path', 'utf8')
+  console.log(data)
+})()
+```
+
+---
+
+## Bad things about promises
+
+* Promises are a bit slower than callbacks.
+* You can`t cancel a promise
+* Promise can only resolve once
+
+---
+
+# Observables an other day!
+
+---
+
+## Docs
+
+* https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Promise
+* https://medium.com/@colinmackenzie14/async-await-iffy-96c25e06be6f
+* https://javascript.info/async-await
+* http://2ality.com/2017/05/util-promisify.html
