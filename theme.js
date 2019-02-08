@@ -6,7 +6,7 @@ export default {
 
   css: {
     ...theme.css,
-    backgroundImage: 'url(./background.svg)',
+    backgroundImage: 'url(./images/background.svg)',
     backgroundPosition: 'top right',
     backgroundRepeat: 'no-repeat'
   },
