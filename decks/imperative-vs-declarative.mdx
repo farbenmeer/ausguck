@@ -1,0 +1,134 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Imperativ vs Deklarativ</title>
+</Head>
+
+
+# Imperativ vs Deklarativ
+by Henrik Wenz
+
+---
+
+## Die deklarative Programmierung ist ein Programmierparadigma, bei dem die Beschreibung des Problems im Vordergrund steht.
+
+---
+
+## Wie (imperativ) vs. Was (deklarativ)
+
+---
+
+# Ziel
+## Trennung von Arbeits- und Steuermechanismus
+
+---
+
+## Beispiel 1
+
+```
+Gehe in die Küche
+Öffne den Kühlschrank
+Nimm ein Kaltgetränk
+Schließe den Kühlschrank
+Stell mir dieses Kaltgetränk hin
+```
+
+```
+Ich will ein Kaltgetränk
+```
+
+---
+
+## Beispiel 2 (imperativ)
+
+```js
+const zahlen = [1,2,3,4,5]
+const verdoppelt = []
+
+for(let i = 0; i < zahlen.length; i++) {
+  const neueZahl = zahlen[i] * 2
+  verdoppelt.push(neueZahl)
+}
+
+console.log(verdoppelt)
+```
+
+---
+
+## Beispiel 2 (deklatativ)
+
+```js
+const zahlen = [1,2,3,4,5]
+
+const verdoppelt = zahlen.map((n) => n * 2)
+
+console.log(verdoppelt)
+```
+
+---
+
+## Beispiel 3 (imperativ)
+
+```js
+const container = document.getElementById('container');
+const btn = document.createElement('button');
+btn.className = 'btn red';
+btn.onclick = function(event) {
+ if (this.classList.contains('red')) {
+   this.classList.remove('red');
+   this.classList.add('blue');
+ } else {
+   this.classList.remove('blue');
+   this.classList.add('red');
+ }
+};
+container.appendChild(btn);
+```
+
+---
+
+## Beispiel 3 (deklarativ)
+
+```js
+const Button = () => {
+  const [color, setColor] = useState('red')
+  return (
+    <button 
+      className={`btn`}
+      onClick={(event) => setColor(color === 'red' ? 'blue' : 'red')}
+    />
+  )
+}
+```
+
+---
+
+## Beispiel 4 (next.js)
+
+```js
+const Link = withRouter(({ href, router }) => {
+  const handleClick = (event) => {
+    event.preventDefault()
+    router.push(href)
+  }
+  return (
+    <a href={href} onClick={handleClick}>
+      {children}
+    </a>
+  )
+})
+```
+
+---
+
+## Beispiel 4 (next.js)
+
+```js
+const App => () => (
+  <div>
+    <Link href='/about'>about</Link>
+  </div>
+)
+```
