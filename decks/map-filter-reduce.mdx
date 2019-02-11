@@ -1,0 +1,217 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Array functions!</title>
+</Head>
+
+# Array functions!
+
+---
+
+map 
+
+---
+
+map  
+filter
+
+---
+
+map  
+filter  
+reduce
+
+---
+
+functional  
+
+---
+
+functional  
+declarative 
+
+---
+
+functional  
+declarative  
+no side effects
+
+---
+
+map 
+
+---
+
+```js
+var new_array = arr.map(function callback(currentValue[, index[, array]]) {
+    // Return element for new_array
+}[, thisArg])
+```
+
+---
+
+```js
+[1, 2, 3].map(i => i * 2)
+```
+
+---
+
+```js
+[1, 2, 3].map(i => i * 2) // [2, 4, 6]
+```
+
+---
+
+filter 
+
+---
+
+```js
+var newArray = arr.filter(callback(element[, index[, array]])[, thisArg])
+```
+
+---
+
+```js
+[1, 2, 3].filter(i => i < 3)
+```
+
+---
+
+```js
+[1, 2, 3].filter(i => i < 3) // [1, 2]
+```
+
+---
+
+reduce
+
+---
+
+```js
+arr.reduce(callback[, initialValue])
+```
+
+---
+
+callback:
+
+```
+callback(accumulator, currentValue, currentIndex, array)    
+```
+
+---
+
+```js
+[1, 2, 3].reduce((acc, curr) => acc += curr, 0)
+```
+
+---
+
+```js
+[1, 2, 3].reduce((acc, curr) => acc += curr, 0) // sum, 6
+```
+
+---
+
+array.length
+
+---
+
+array.length
+
+```js
+[1, 2, 3].reduce(acc => acc + 1, 0)
+```
+
+---
+
+array.indexOf
+
+---
+
+array.indexOf
+
+```js
+const searchFor = 2
+[1, 2, 3].reduce((acc, curr, index) => acc === -1 && curr === searchFor ? index : acc, -1)
+```
+
+---
+
+BONUS: map, filter with reduce!
+
+---
+
+map:
+
+---
+
+map:
+
+```js
+[1, 2, 3].reduce((acc, curr) => acc.concat(curr * 2) , [])
+```
+---
+
+map:
+
+```js
+[1, 2, 3].reduce((acc, curr) => acc.concat(curr * 2) , []) // 2, 4, 6
+```
+
+---
+
+```js
+const myMap = (arr, fn) => arr.reduce((acc, curr) => acc.concat(fn(curr)), [])
+```
+
+---
+
+```js
+const arr = [1, 2, 3]
+const fn = i => i * 2
+const result = myMap(arr, fn)
+
+// result === [2, 4, 6]
+```
+
+---
+
+filter:
+
+---
+
+filter:
+
+```js
+const myFilter = (arr, fn) => arr.reduce((acc, curr) => fn(curr) ? acc.concat(curr) : acc , [])
+```
+
+---
+
+```js
+const arr = [1, 2, 3]
+const fn = i => i < 3
+const result = myFilter(arr, fn)
+
+// result === [1, 2]
+```
+
+---
+
+ressources
+
+[map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)  
+[filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)  
+[reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)  
+
+---
+
+thanks
+
+
+
+questions, comments, notes on twitter: [@mxstrbng](https://twitter.com/mxstrbng)
