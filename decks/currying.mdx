@@ -1,0 +1,175 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Currying</title>
+  <meta name="author" content="Max Strübing" />
+  <meta name="twitter" content="https://twitter.com/mxstrbng" />
+  <meta name="github" content="https://github.com/mstruebing" />
+</Head>
+
+# Currying!
+
+---
+
+"In mathematics and computer science, currying is the technique of translating the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single argument."
+
+[wikipedia.org/wiki/Currying](https://en.wikipedia.org/wiki/Currying)
+
+---
+
+![Haskell Curry](../images/currying/HaskellBCurry.jpg "Haskell Curry")  
+<small>Haskell Curry</small>
+
+---
+
+![Function](../images/currying/function.svg "Function")
+
+---
+
+![Function](../images/currying/function.svg "Function")  
+
+![Curried Function](../images/currying/curriedFunction.svg "Curried Function")
+
+---
+
+```js 
+function add(a, b) {
+    return a + b;
+}
+```
+
+---
+
+
+```js
+function add(a) {
+    return function(b) {
+        return a + b;
+    }
+}
+
+```
+
+---
+
+```js
+add(1)(2); // 3
+```
+
+---
+
+```js
+const add1 = add(1);
+add1(2); // 3
+```
+
+---
+
+With arrow functions
+
+```js
+const add = (x, y) => x + y;
+```
+
+---
+
+With arrow functions
+
+```js
+const add = x => y => x + y;
+```
+
+---
+
+```js
+const add = (x, y) => x + y;
+```
+
+![Function](../images/currying/function.svg "Function")  
+
+---
+
+```js
+const add = x => y => x + y;
+```
+
+![Curried Function](../images/currying/curriedFunction.svg "Curried Function")
+
+---
+
+lodash.curry
+
+```js
+import {curry} from 'lodash.curry';
+
+const abc = (a, b, c) => {
+    return [a, b, c];
+};
+
+const curried = curry(abc);
+
+curried(1)(2)(3);
+// => [1, 2, 3]
+ 
+curried(1, 2)(3);
+// => [1, 2, 3]
+ 
+curried(1, 2, 3);
+// => [1, 2, 3]
+```
+
+---
+
+If you apply the same arguments to a function more than once you should think if currying would be a good choice for you.
+
+---
+
+Some languages that are curried by default: Haskell, Elm, OCaml, F# ...
+
+---
+
+How does currying looks like in other languages?
+
+---
+
+Go:
+
+```go
+func add(x int) func(int) int {
+    return func(y int) int {
+        return x + y
+    }
+}
+
+func main() {
+    fmt.Println(add(1)(2)) // 3
+    add1 := add(1)
+    fmt.Println(add1(2)) // 3
+    fmt.Println(add1(3)) // 4
+}
+```
+
+---
+
+Haskell:
+
+```hs
+add x y  = x + y 
+
+add1 = add 1
+
+main = do
+    print $ add 1 2 -- 3
+    print $ add1 2 -- 3
+    print $ add1 3 -- 4
+```
+
+---
+
+resources:
+
+[lodash.curry](https://lodash.com/docs#curry)
+
+[wikipedia currying](https://en.wikipedia.org/wiki/Currying)
