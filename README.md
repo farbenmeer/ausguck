@@ -12,6 +12,8 @@ You can start the Currently available ones like this:
 ```sh
 yarn start async-javascript
 yarn start currying
+yarn start higher-order-components
+yarn start imperative-vs-declarative
 yarn start map-filter-reduce
 yarn start sample
 ```
