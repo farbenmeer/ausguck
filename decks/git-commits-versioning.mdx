@@ -1,0 +1,148 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Git commits and versioning</title>
+  <meta name="author" content="Tobias Linkohr" />
+</Head>
+
+# Git commits and versioning!
+
+by Tobias Linkohr  
+([github](https://github.com/Tobi-mmt))
+
+---
+
+# Git commits
+
+---
+
+## Simple
+```
+<type>: <subject>
+```
+   
+```
+feat: Add age
+```
+
+---
+
+# Extended
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+```
+
+```
+feat(user): Add age
+
+Add age field to all premium users.
+```
+
+---
+
+# Rules - type
+
+|   |   |
+|---|---|
+|💍 test |      Adding missing tests|
+|🎸 feat |      A new feature|
+|🐛 fix |       A bug fix|
+|🤖 chore |     Build process or auxiliary tool changes|
+|✏️ docs |      Documentation only changes|
+|💡 refactor |  A code change that neither fixes a bug or adds a feature|
+|💄 style |     Markup, white-space, formatting, missing semi-colons...|
+
+---
+
+# Rules - subject
+
+|   |   ||
+|---|---|---|
+| ☝️|Imperative  | Use the imperative mood |
+|   || -> written as if giving a command or instruction |
+| 👼| Short subject |  Max. 50 character subject |
+| 🔊| Capitalize |  First letter in subject |
+| 🧐| No period |   At the end of the subject|
+| ⏱| Present|   No future no past|
+
+
+---
+
+# ❌ Don'ts ❌
+
+ ``` 
+ feat(user): New age field added 
+ ```  
+ ``` 
+ feat(user): added age 
+ ``` 
+ ``` 
+ feat(user): Add age. 
+ ```  
+ ```
+ feat(user): Adds age  
+ ```  
+ ```
+ feat(user): Add age to the profiles and other sides
+ ```  
+
+---
+
+# What we do now
+
+<img src="../images/git-commits-semver/donts.png" alt="donts" width="800" />
+
+---
+
+
+# ✅ Dos ✅
+
+<img src="https://cdn-images-1.medium.com/max/800/1*Brdz1tFiRYemmgWrZgEuLA.png" alt="examples" width="600" />
+---
+
+# Tooling
+
+![](https://github.com/commitizen/cz-cli/raw/master/meta/screenshots/add-commit.png)
+
+[Commitizen](https://github.com/commitizen/cz-cli)
+
+---
+
+# Semantic versioning - semver
+
+---
+
+# The Numbers
+
+```
+1.3.6
+
+MAJOR.MINOR.PATCH
+
+BREAKING.FEATURE.FIX
+```
+
+MAJOR version when you make incompatible API changes <br/>
+MINOR version when you add functionality in a backwards-compatible manner<br/>
+PATCH version when you make backwards-compatible bug fixes
+
+---
+
+# Tooling
+
+<img src="../images/git-commits-semver/sematic-release-note.png" alt="examples" width="800" />
+
+[semantic-release](https://github.com/semantic-release/semantic-release) generates release note and number on each master merge/pull
+
+---
+
+# Further readings
+
+- [Improve github commits](https://medium.com/@roalcantara/a-guide-to-improve-the-git-hub-flow-and-commits-messages-b495461e1115)
+- [Semantic release](https://github.com/semantic-release/semantic-release)
+- [Commitizen repo](https://github.com/commitizen/cz-cli)
+- [semantic-release repo](https://github.com/semantic-release/semantic-release)
