@@ -1,3 +1,6 @@
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/farbenmeer/ausguck.svg)](https://greenkeeper.io/)
+
 We sometimes do lightning talks at work to learn, inspire, and share.
 
 You can find the different decks in the `./decks` directory.
