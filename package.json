@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "description": "The decks of our lightning talks at farbenmeer",
   "scripts": {
-    "start": "./run",
-    "build": "./run build",
-    "pdf": "./run pdf",
-    "image": "./run screenshot",
+    "start": "./bin/run",
+    "build": "./bin/run build",
+    "pdf": "./bin/run pdf",
+    "image": "./bin/run screenshot",
     "help": "mdx-deck"
   },
   "keywords": [],
@@ -18,7 +18,7 @@
   "name": "mdx-decks",
   "husky": {
     "hooks": {
-      "pre-commit": "./pre-commit.sh"
+      "pre-commit": "./bin/pre-commit"
     }
   }
 }
