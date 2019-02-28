@@ -3,7 +3,6 @@
 set -e
 
 readonly README="README.md"
-readonly DOCS="./docs"
 
 readonly DECKS=$(find . -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
 
@@ -56,27 +55,10 @@ function modify_readme() {
 
 function git_add() {
     git add $README
-    git add $DOCS
-}
-
-function create_decks() {
-    rm -Rf docs
-
-    for deck in $DECKS; do
-        if [[ "$deck" == "sample" ]]; then
-            continue
-        fi
-
-        rm -Rf dist
-        yarn build "$deck"
-        mkdir -p docs/"$deck"
-        mv dist/* docs/"$deck"/
-    done
 }
 
 function main() {
     modify_readme
-    create_decks
     git_add
 }
 
