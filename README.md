@@ -1,5 +1,8 @@
 
-[![CircleCI](https://circleci.com/gh/farbenmeer/ausguck.svg?style=svg)](https://circleci.com/gh/farbenmeer/ausguck) [![Greenkeeper badge](https://badges.greenkeeper.io/farbenmeer/ausguck.svg)](https://greenkeeper.io/) 
+[![CircleCI](https://circleci.com/gh/farbenmeer/ausguck.svg?style=svg)](https://circleci.com/gh/farbenmeer/ausguck)
+[![dependencies Status](https://david-dm.org/greenkeeperio/greenkeeper-lockfile/master/status.svg)](https://david-dm.org/greenkeeperio/greenkeeper-lockfile/master)
+[![devDependencies Status](https://david-dm.org/farbenmeer/ausguck/dev-status.svg)](https://david-dm.org/farbenmeer/ausguck?type=dev)
+[![Greenkeeper badge](https://badges.greenkeeper.io/farbenmeer/ausguck.svg)](https://greenkeeper.io/)
 
 We sometimes do lightning talks at work to learn, inspire, and share.
 
