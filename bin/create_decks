@@ -25,17 +25,17 @@ function copy_images () {
 
 function create_index() {
     {
-        echo "<h1> All decks from farbenmeer</h1>"
+        echo "# All decks from farbenmeer"
         for deck in $DECKS; do
         if [[ "$deck" == "sample" ]]; then
             continue
         fi
-        echo '<a href="'"$deck"'">'"$deck"'</a></br>'
+        printf "* ["$deck"]("$deck")\n"
         done
 
-        echo "<p>www.farbenmeer.de</p>"
+        printf "\n\n[farbenmeer.de](https://www.farbenmeer.de)"
 
-    } >> build/index.html
+    } >> build/index.md
 }
 
 rm -Rf docs
