@@ -1,0 +1,660 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Elm</title>
+</Head>
+
+# Elm
+__aka developer friendliness on the frontend__
+
+by Max Strübing  
+([twitter](https://twitter.com/mxstrbng), [github](https://github.com/mstruebing))
+
+---
+
+![Elm logo](../images/elm/elm.png "Elm logo")
+
+---
+
+![Elm google search](../images/elm/elm-google.png "Elm google search")
+
+---
+
+![Elm google images search](../images/elm/elm-google-images.png "Elm google images search")
+
+---
+
+## What’s the problem with JavaScript?
+
+---
+
+![undefined](../images/elm/undefined.png "undefined")
+
+---
+
+![js parts](../images/elm/js-parts.jpg "js parts")
+
+---
+
+> “Redux evolves the ideas of Flux, but avoids its complexity by taking cues from Elm.”
+
+Dan Abramov, Author of Redux
+
+<small>Source: https://github.com/reduxjs/redux/blob/master/README.md#influences</small>
+
+---
+
+![frontend dev](../images/elm/frontend.png "frontend dev")
+
+---
+
+---
+
+## But what about Elm?
+
+---
+
+A delightful language for reliable webapps.
+
+---
+
+A delightful language for reliable webapps.  
+Generate JavaScript with great performance and no runtime exceptions.
+
+---
+
+![delightful](../images/elm/delightful.png "delightful")
+
+---
+
+A delightful language for reliable webapps.  
+Generate JavaScript with great performance and no runtime exceptions.
+
+---
+
+A **delightful** language for reliable webapps.  
+Generate JavaScript with great performance and no runtime exceptions.
+
+---
+
+A **delightful** language for **reliable** webapps.  
+Generate JavaScript with great performance and no runtime exceptions.
+
+---
+
+A **delightful** language for **reliable** webapps.  
+Generate JavaScript with **great performance** and no runtime exceptions.
+
+---
+
+A **delightful** language for **reliable** webapps.  
+Generate JavaScript with **great performance** and **no runtime exceptions**.
+
+---
+
+A **delightful** language for **reliable** webapps.  
+Generate JavaScript with **great performance** and **no runtime exceptions** *.
+
+---
+
+## Boring facts
+
+---
+
+![boring](../images/elm/boring.webp "boring")
+
+---
+
+### Boring facts 1
+
+---
+
+### Boring facts 1
+
+* Evan Czaplicki - master thesis
+
+---
+
+### Boring facts 1
+
+* Evan Czaplicki - master thesis
+* released in 2012
+
+---
+
+### Boring facts 1
+
+* Evan Czaplicki - master thesis
+* released in 2012
+* implemented in Haskell
+
+---
+
+### Boring facts 1
+
+* Evan Czaplicki - master thesis
+* released in 2012
+* implemented in Haskell
+* latest release 0.19 / August 21, 2018
+
+---
+
+### Boring facts 1
+
+* Evan Czaplicki - master thesis
+* released in 2012
+* implemented in Haskell
+* latest release 0.19 / August 21, 2018
+* influenced by: Haskell, Standard ML, OCaml, F#
+
+---
+
+### Boring facts 1
+
+* Evan Czaplicki - master thesis
+* released in 2012
+* implemented in Haskell
+* latest release 0.19 / August 21, 2018
+* influenced by: Haskell, Standard ML, OCaml, F#
+* influenced: Redux, Vue.js
+
+---
+
+### Boring facts 2
+
+---
+
+### Boring facts 2
+
+* functional
+
+---
+
+### Boring facts 2
+
+* functional
+* transpiles to JS
+
+---
+
+### Boring facts 2
+
+* functional
+* transpiles to JS
+* statically typed + inferred
+
+---
+
+### Boring facts 2
+
+* functional
+* transpiles to JS
+* statically typed + inferred
+* everything immutable
+
+---
+
+### Boring facts 2
+
+* functional
+* transpiles to JS
+* statically typed + inferred
+* everything immutable
+* all functions are pure
+
+---
+
+### Boring facts 2
+
+* functional
+* transpiles to JS
+* statically typed + inferred
+* everything immutable
+* all functions are pure
+* ‘null’ / ‘undefined’ / exceptions do not exist
+
+---
+
+![survey results](../images/elm/survey-results.png "survey results")  
+<small>https://ashleynolan.co.uk/blog/frontend-tooling-survey-2018-results</small>
+
+---
+
+![maintainable usable](../images/elm/maintainable-usable.png "maintainable usable")
+<small>http://guupa.com/elm-presentation/</small>
+
+---
+
+## The cool stuff
+
+---
+
+![cool](../images/elm/cool.webp "cool")
+
+---
+
+# Performance
+![performance](../images/elm/performance.png "performance")  
+<small>https://elm-lang.org/blog/blazing-fast-html-round-two</small>
+
+---
+
+# Asset Size
+![Asset Size](../images/elm/asset-sizes.png "Asset Size")  
+<small>https://elm-lang.org/blog/small-assets-without-the-headache</small>
+
+
+---
+
+### Compiler Error Messages
+
+---
+
+![list.nap](../images/elm/compiler-list-nap.png "list.nap")  
+
+---
+
+![branches](../images/elm/compiler-branches.png "branches")  
+
+---
+
+![type-comparisons](../images/elm/compiler-type-comparison.png "type-comparisons")  
+
+---
+
+![type-comparisons2](../images/elm/compiler-type-comparison2.png "type-comparisons2")  
+
+---
+
+![type-comparisons3](../images/elm/compiler-type-comparison3.png "type-comparisons3")  
+
+---
+
+![type-comparisons4](../images/elm/compiler-type-comparison4.png "type-comparisons4")  
+
+---
+
+### No Runtime Exceptions
+
+---
+
+![Exceptions](../images/elm/exception.png "Exceptions")  
+
+---
+
+![Exceptions 2](../images/elm/exception2.png "Exceptions 2")  
+
+---
+
+![head](../images/elm/head.png "head")  
+
+---
+
+"If it compiles it works"
+
+---
+
+```elm
+Debug.crash "WHOOPS"
+```
+
+---
+
+### Automatic Semver
+
+---
+
+![semver](../images/elm/semver.png "semver")  
+
+---
+
+
+![publishing](../images/elm/publishing.png "publishing")  
+
+---
+
+### elm-format
+<small>https://github.com/avh4/elm-format</small>
+
+
+---
+
+```js
+initialModel : Model
+initialModel = 
+    { board = sampleBoard
+    , autosave = True
+    , newTodoListName = ""
+    , newTodos = Dict.empty
+    }
+```
+
+---
+
+* whitespace greedy
+
+---
+
+* whitespace greedy
+* hates parenthesis
+
+---
+
+* whitespace greedy
+* hates parenthesis
+* `,` on the next line
+
+
+---
+
+### Comparison of a modern JS Stack vs Elm
+
+---
+
+| JavaScript | |
+|---|---|
+
+---
+
+| JavaScript | Elm |
+|---|---|
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+| Types(Typescript/Flow) | |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+| Types(Typescript/Flow) | Built in |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+| Types(Typescript/Flow) | Built in |
+| Linter(eslint,xo) | |
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+| Types(Typescript/Flow) | Built in |
+| Linter(eslint,xo) | Built in |
+
+
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+| Types(Typescript/Flow) | Built in |
+| Linter(eslint,xo) | Built in |
+| Code-Style(Prettier,Standard) | |
+---
+
+| JavaScript | Elm |
+|---|---|
+| package-manager(npm/yarn) | Built in |
+| V-DOM(React,Preact,Vue,Inferno) | Built in |
+| State-Mangement(Redux,Mobx) | Built in |
+| Immutability(Immutable.js) | Built in |
+| Types(Typescript/Flow) | Built in |
+| Linter(eslint,xo) | Built in |
+| Code-Style(Prettier,Standard) | Built in |
+
+---
+
+### How does this work?
+
+---
+
+`*.elm` -> compiler -> `*.js`
+
+---
+
+```js
+let Elm = require("./App.elm"),
+    node = document.getElementById('main');
+
+Elm.App.embed(node);
+```
+
+---
+
+```js
+import Elm from 'react-elm-components'
+import { Todo } from '../dist/elm/todomvc.js'
+
+function render() {
+	return <Elm src={Todo} />
+}
+```
+
+https://github.com/evancz/react-elm-components
+
+---
+
+https://github.com/halfzebra/create-elm-app
+
+---
+
+## Show me the fucking code!
+
+---
+
+![waiting](../images/elm/are-you-done.gif "waiting")
+
+---
+
+https://elm-lang.org/docs/syntax
+
+---
+
+But first, the Elm-Architecure
+
+---
+
+![elm-architecure](../images/elm/elm-architecture.png "elm-architecure")
+
+---
+
+![elm-architecure-program](../images/elm/elm-architecture-program.png "elm-architecure-program")
+
+---
+
+![elm-architecure-comlete](../images/elm/elm-architecture-complete.png "elm-architecure-complete")
+
+---
+
+![subscription](../images/elm/subscription.png "subscription")
+
+---
+
+![cmd](../images/elm/cmd.png "cmd")
+
+---
+
+## What if Elm doesn't do X?
+
+---
+
+## Ports
+
+---
+
+```elm
+port module exposing (setTitle)
+
+port setTitle : String -> Cmd msg
+```
+
+---
+
+```js
+import './main.css';
+import { Elm } from './Main.elm';
+import registerServiceWorker from './registerServiceWorker';
+
+const app = Elm.Main.init({
+  node: document.getElementById('root')
+});
+
+registerServiceWorker();
+
+app.ports.playSound.subscribe(() => {
+    new Audio('/sound.mp3').play();
+});
+
+app.ports.setTitle.subscribe(title => {
+    document.title = title
+});
+```
+
+---
+
+![spellcheck](../images/elm/spellcheck.png "spellcheck")
+
+---
+
+![spellcheck2](../images/elm/spellcheck2.png "spellcheck2")
+
+---
+
+## How does HTML look like?
+
+---
+
+```html
+<a href="https://example.com">
+    <img src="product.jpg"/>
+    <p class="description">Descriptive Text</p>
+</a>
+```
+
+---
+
+```html
+<a href="https://example.com">
+    <img src="product.jpg"/>
+    <p class="description">Descriptive Text</p>
+</a>
+```
+
+```elm
+a [ href "https://example.com" ]
+    [ img [src "product.jpg"] []
+    , p [ class "description" ] [text "Descriptive Text"]
+    ]
+```
+
+---
+
+```html
+<a href="https://example.com">
+    <img src="product.jpg"/>
+    <p class="description">Descriptive Text</p>
+</a>
+```
+
+```elm
+a [ href "https://example.com" ]
+    [ img [src "product.jpg"] []
+    , p [ class "description" ] [text "Descriptive Text"]
+    ]
+```
+
+// sorry, no syntax highlighting for elm code :(
+
+---
+
+Emmet is working
+<small>https://emmet.io/</small>
+
+---
+
+thx 4 ur patience, let's code!
