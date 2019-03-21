@@ -1,5 +1,5 @@
-import theme from 'mdx-deck/themes'
-import okaidia from 'react-syntax-highlighter/styles/prism/okaidia'
+import theme from '@mdx-deck/themes'
+import okaidia from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia'
 
 export default {
   ...theme,
