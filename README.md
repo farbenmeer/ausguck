@@ -18,7 +18,6 @@ You can start the Currently available ones like this:
 ```sh
 yarn start async-javascript
 yarn start currying
-yarn start demo
 yarn start elm
 yarn start git-commits-versioning
 yarn start higher-order-components
