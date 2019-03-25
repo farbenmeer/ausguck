@@ -2,7 +2,7 @@
 
 set -e
 
-readonly DECKS=$(find ./decks/ -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
+readonly DECKS=$(find . -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
 
 
 function create_decks() {

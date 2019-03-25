@@ -4,7 +4,7 @@ set -e
 
 readonly README="README.md"
 
-readonly DECKS=$(find ./decks/ -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
+readonly DECKS=$(find . -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
 
 function remove_lines_between() {
     readonly local first="$1"

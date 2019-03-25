@@ -1,7 +1,7 @@
-import theme, {syntaxHighlighterPrism} from '@mdx-deck/themes'
-import okaidia from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia'
+import theme from 'mdx-deck/themes'
+import okaidia from 'react-syntax-highlighter/styles/prism/okaidia'
 
-export default syntaxHighlighterPrism({
+export default {
   ...theme,
 
   css: {
@@ -19,4 +19,10 @@ export default syntaxHighlighterPrism({
   prism: {
     style: okaidia
   }
-});
+
+  // Customize your presentation theme here.
+  //
+  // Read the docs for more info:
+  // https://github.com/jxnblk/mdx-deck/blob/master/docs/theming.md
+  // https://github.com/jxnblk/mdx-deck/blob/master/docs/themes.md
+}
