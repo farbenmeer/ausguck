@@ -36,6 +36,13 @@ by Moritz Thomas
 
 ---
 
+## Example with deps
+```js
+useEffect(() => trackPageView(location), [location]);
+```
+
+---
+
 ## https://www.npmjs.com/package/eslint-plugin-react-hooks
 ```js
 {
@@ -75,6 +82,15 @@ useEffect(() => {
 
 ---
 
+## Example
+```js
+useEffect(() => {
+  setSnackbar(JSCookie.get(COOKIE_CONSENT_NAME) !== 'yes');
+}, []);
+```
+
+---
+
 ## componentWillUnmount Pattern
 ```js
 useEffect(() => {
@@ -92,6 +108,16 @@ useEffect(() => {
 useEffect(() => () => {
   /* do unmount stuff */
 });
+```
+
+---
+
+## Example
+```js
+const VideoPlaceholder = ({ url }) => {
+  const [play, setPlay] = useState(false);
+  // Disable video when switching to different recipe!
+  useEffect(() => () => setPlay(false), [url]);
 ```
 
 ---
