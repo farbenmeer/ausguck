@@ -19,6 +19,7 @@ by Moritz Thomas
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     // Update the document title using the browser API
+    // Will be executed after rendering is done!
     document.title = `You clicked ${count} times`;
   });
 ```
@@ -36,7 +37,7 @@ by Moritz Thomas
 
 ---
 
-## Example with deps
+## Example
 ```js
 useEffect(() => trackPageView(location), [location]);
 ```
@@ -60,19 +61,6 @@ useEffect(() => trackPageView(location), [location]);
 
 ---
 
-## Cleanup
-```js
-useEffect(() => {
-    // ...
-    return () => {
-        // clean something up like
-        // timers or subscriptions
-    };
-});
-```
-
----
-
 ## componentDidMount Pattern
 ```js
 useEffect(() => {
@@ -88,15 +76,27 @@ useEffect(() => {
   setSnackbar(JSCookie.get(COOKIE_CONSENT_NAME) !== 'yes');
 }, []);
 ```
+---
+
+## Cleanup
+```js
+useEffect(() => {
+    // ...
+    return () => {
+        // clean something up like
+        // timers or subscriptions
+    };
+});
+```
 
 ---
 
-## componentWillUnmount Pattern
+## componentWillUnmount-Pattern
 ```js
 useEffect(() => {
   // ...
   return () => {
-    // do unmount stuff
+    // do "unmount" stuff
   };
 }, []);
 ```
@@ -106,7 +106,7 @@ useEffect(() => {
 ## componentWillUnmount in short:
 ```js
 useEffect(() => () => {
-  /* do unmount stuff */
+  /* do "unmount" stuff */
 });
 ```
 
@@ -114,10 +114,10 @@ useEffect(() => () => {
 
 ## Example
 ```js
-const VideoPlaceholder = ({ url }) => {
+const VideoPlaceholder = ({ videoUrl }) => {
   const [play, setPlay] = useState(false);
-  // Disable video when switching to different recipe!
-  useEffect(() => () => setPlay(false), [url]);
+  // Disable video when switching to different page!
+  useEffect(() => () => setPlay(false), [videoUrl]);
 ```
 
 ---
@@ -131,7 +131,7 @@ const jumpMarker = useRef(null);
 
 useEffect(() => {
   let timeout;
-  if (typeof window !== 'undefined' && hash && window.location.hash === hash) {
+  if (typeof window !== 'undefined' && window.location.hash === hash) {
     // Apparently scrolling has to be delayed slightly for unclear reasons.
     timeout = setTimeout(() => {
       jumpMarker.current.scrollIntoView();
