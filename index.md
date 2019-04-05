@@ -6,6 +6,7 @@
 * [higher-order-components](higher-order-components)
 * [imperative-vs-declarative](imperative-vs-declarative)
 * [map-filter-reduce](map-filter-reduce)
+* [use-effect-hook](use-effect-hook)
 
 
 [farbenmeer.de](https://www.farbenmeer.de)
