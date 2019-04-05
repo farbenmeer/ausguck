@@ -1,0 +1,150 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>useEffect hook</title>
+  <meta name="author" content="Moritz Thomas" />
+</Head>
+
+# useEffect hook
+by Moritz Thomas
+
+---
+
+## Simple example
+```js
+  const [count, setCount] = useState(0);
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    // Update the document title using the browser API
+    // Will be executed after rendering is done!
+    document.title = `You clicked ${count} times`;
+  });
+```
+
+---
+
+## Which should be more like this
+```js
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `You clicked ${count} times`;
+  }, [count]);
+```
+
+---
+
+## Example
+```js
+useEffect(() => trackPageView(location), [location]);
+```
+
+---
+
+## https://www.npmjs.com/package/eslint-plugin-react-hooks
+```js
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
+```
+
+---
+
+## componentDidMount Pattern
+```js
+useEffect(() => {
+  // ...
+}, []);
+```
+
+---
+
+## Example
+```js
+useEffect(() => {
+  setSnackbar(JSCookie.get(COOKIE_CONSENT_NAME) !== 'yes');
+}, []);
+```
+---
+
+## Cleanup
+```js
+useEffect(() => {
+    // ...
+    return () => {
+        // clean something up like
+        // timers or subscriptions
+    };
+});
+```
+
+---
+
+## componentWillUnmount-Pattern
+```js
+useEffect(() => {
+  // ...
+  return () => {
+    // do "unmount" stuff
+  };
+}, []);
+```
+
+---
+
+## componentWillUnmount in short:
+```js
+useEffect(() => () => {
+  /* do "unmount" stuff */
+});
+```
+
+---
+
+## Example
+```js
+const VideoPlaceholder = ({ videoUrl }) => {
+  const [play, setPlay] = useState(false);
+  // Disable video when switching to different page!
+  useEffect(() => () => setPlay(false), [videoUrl]);
+```
+
+---
+
+# Big real-life example:
+
+---
+
+```js
+const jumpMarker = useRef(null);
+
+useEffect(() => {
+  let timeout;
+  if (typeof window !== 'undefined' && window.location.hash === hash) {
+    // Apparently scrolling has to be delayed slightly for unclear reasons.
+    timeout = setTimeout(() => {
+      jumpMarker.current.scrollIntoView();
+    }, 500);
+  }
+  return () => clearTimeout(timeout); // Cleanup
+}, [hash, jumpMarker]);
+```
+
+---
+
+## Sources
+- [https://overreacted.io/a-complete-guide-to-useeffect/](https://overreacted.io/a-complete-guide-to-useeffect/)
+- [https://reactjs.org/docs/hooks-effect.html](https://reactjs.org/docs/hooks-effect.html)
+## Further reading
+- Data fetching with hooks: https://www.robinwieruch.de/react-hooks-fetch-data/
