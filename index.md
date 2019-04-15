@@ -1,6 +1,7 @@
 # All decks from farbenmeer
 * [async-javascript](async-javascript)
 * [currying](currying)
+* [dynamic-programming](dynamic-programming)
 * [elm](elm)
 * [git-commits-versioning](git-commits-versioning)
 * [higher-order-components](higher-order-components)
