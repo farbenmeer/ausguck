@@ -1,12 +1,12 @@
-import theme from 'mdx-deck/themes'
-import okaidia from 'react-syntax-highlighter/styles/prism/okaidia'
+import theme, {syntaxHighlighterPrism} from '@mdx-deck/themes'
+import okaidia from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia'
 
-export default {
+export default syntaxHighlighterPrism({
   ...theme,
 
   css: {
     ...theme.css,
-    backgroundImage: 'url(../images/background.svg)',
+    backgroundImage: 'url(../decks/images/background.svg)',
     backgroundPosition: 'top right',
     backgroundRepeat: 'no-repeat'
   },
@@ -19,10 +19,4 @@ export default {
   prism: {
     style: okaidia
   }
-
-  // Customize your presentation theme here.
-  //
-  // Read the docs for more info:
-  // https://github.com/jxnblk/mdx-deck/blob/master/docs/theming.md
-  // https://github.com/jxnblk/mdx-deck/blob/master/docs/themes.md
-}
+});
