@@ -6,7 +6,7 @@ export default syntaxHighlighterPrism({
 
   css: {
     ...theme.css,
-    backgroundImage: 'url(../decks/images/background.svg)',
+    backgroundImage: 'url(../images/background.svg)',
     backgroundPosition: 'top right',
     backgroundRepeat: 'no-repeat'
   },
