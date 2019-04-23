@@ -13,6 +13,8 @@ USAGE:
 npm run <start|build|pdf|image> <deckname>
 ```
 
+In order to let your images work locally: build all decks once: `./bin/create_decks` and start a server locally .i.e [http-server](https://www.npmjs.com/package/http-server).
+
 You can start the Currently available ones like this:
 
 ```sh

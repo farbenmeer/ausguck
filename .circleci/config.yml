@@ -15,7 +15,7 @@ jobs:
       - persist_to_workspace:
           root: /root/project
           paths: 
-            - build
+            - ausguck
 
   deploy:
     docker:
@@ -35,7 +35,7 @@ jobs:
             git config user.name "ci-build"
       - run:
           name: Deploy build to gh-pages branch
-          command: gh-pages -x --dist build
+          command: gh-pages -x --dist ausguck
     
 workflows:
   version: 2
