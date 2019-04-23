@@ -13,14 +13,14 @@ function create_decks() {
 
         rm -Rf dist
         yarn build "$deck"
-        mkdir -p build/"$deck"
-        mv dist/* build/"$deck"/
+        mkdir -p ausguck/"$deck"
+        mv dist/* ausguck/"$deck"/
     done
     rm -Rf dist
 }
 
 function copy_images () {
-    cp -r decks/images build
+    cp -r decks/images ausguck
 }
 
 function create_index() {
@@ -35,7 +35,7 @@ function create_index() {
 
         printf "\n\n[farbenmeer.de](https://www.farbenmeer.de)"
 
-    } >> build/index.md
+    } >> ausguck/index.md
 }
 
 rm -Rf docs
