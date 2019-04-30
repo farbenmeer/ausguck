@@ -1,0 +1,377 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Web Components</title>
+</Head>
+
+# Web Components
+
+
+by Max Strübing  
+([twitter](https://twitter.com/mxstrbng), [github](https://github.com/mstruebing))
+
+---
+
+Web Components is a suite of different technologies allowing you to create reusable custom elements — with their functionality encapsulated away from the rest of your code — and utilize them in your web apps.
+
+[https://developer.mozilla.org/en-US/docs/Web/Web_Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
+
+---
+
+You can create your own custom components i.e: `<my-button>`
+
+---
+
+`-` in the name is mandatory.
+
+---
+
+There are three main concepts.
+
+---
+
+## Custom Element
+
+A set of JS-APIs to define your custom components and their behaviour
+
+---
+
+## Shadow DOM 
+
+API to encapsulate an own DOM-tree to your custom component without 
+interferring with the main-DOM.
+
+---
+
+## HTML templates
+
+`<template>`: is not rendered in the DOM but can be referenced via JS  
+`<slot>`: inject other components into your own component.
+
+---
+
+```js
+customElements.define(name, component);
+```
+
+---
+
+```js
+customElements.define(
+  'my-element',
+  class extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({mode: 'open'});
+
+      this.shadowRoot.innerHTML = `
+              <p>This is my own element</p>
+          `;
+    }
+  },
+);
+```
+
+---
+
+```html
+<my-element />
+```
+
+---
+
+There are many more to extend i.e. `HTMLButtonElement`, `HTMLAudioElement`, `HTMLDivElement` ....
+
+[https://html.spec.whatwg.org/multipage/indices.html#element-interfaces](https://html.spec.whatwg.org/multipage/indices.html#element-interfaces)
+
+---
+
+You can also extend other custom components.
+
+---
+
+## Lifecycle Methods
+
+---
+
+### `connectedCallback` 
+
+- the element has been inserted into the DOM 
+- `componentDidMount`
+
+---
+
+### `disconnectedCallback` 
+
+- the element has been removed from the DOM 
+- right after `componentWillUnmount` 
+
+---
+ 
+### `attributeChangedCallback` 
+
+- everytime a passed property changes 
+- *which is observed
+
+---
+
+## Lifecycle order 
+
+1. `constructor` 
+2. `attributeChangedCallback` 
+3. `connectedCallback` 
+4. `disconnectedCallback`
+
+---
+
+1. `constructor`
+
+```js
+constructor() {
+  super(); // is mandatory
+
+  // needed to use the shadow dom
+  this.attachShadow({mode: 'open'}); 
+
+  this.shadowRoot.innerHTML = 
+    `<p>the HTML inside the shadow DOM</p>`;
+}
+```
+
+---
+
+2. `attributeChangedCallback`
+
+```js
+static get observedAttributes() {
+  return ['view'];
+}
+
+attributeChangedCallback(attr, oldVal, newVal) {
+  if (attr === 'view' && newVal) {
+    this.switchView(newVal);
+  }
+}
+```
+
+---
+
+3. `connectedCallback`
+
+```js
+connectedCallback() {
+  this.property = this.getAttribute('property');
+
+  this.shadowRoot.querySelector('selector')
+    .addEventListener('event', func)
+}
+```
+
+---
+
+4. `disconnectedCallback`
+
+```js
+disconnectedCallback() {
+  this.shadowRoot.querySelector('selector')
+    .removeEventListener('event', func)
+}
+```
+
+---
+
+## Scope
+
+Every method on your custom element is public.
+
+---
+
+```js
+class MyElement extends HTMLElement {
+  // lots of stuff
+  doSomething() {
+    // do something in this method
+  }
+}
+```
+
+---
+
+```js
+const element = document.querySelector('my-element');
+element.doSomething();
+```
+
+---
+
+## Styling
+
+Scoped by default
+
+---
+
+```css
+my-element {
+    text-transform: uppercase;
+}
+```
+
+---
+
+```js
+this.shadowRoot.innerHTML = `
+        <style>
+            div {
+                background-color: red;
+            }
+        </style>
+        // ... HTML
+`;
+```
+
+---
+
+```js
+this.shadowRoot.innerHTML = `
+        <style>
+            :host { 
+                text-transform: uppercase; 
+            }
+        </style>
+        // ... HTML
+`;
+```
+
+---
+
+```js 
+this.shadowRoot.innerHTML = `
+    <style>
+        @import "https://my-cool-url/stylesheet.css";
+    </style>
+`;
+</style>
+```
+
+---
+
+## Flexibility through css-vars
+
+---
+
+```css
+/* outsite of the Web-Component */
+my-element {
+    --color: red;
+}
+```
+
+```js
+// inside of the Web-Component
+this.shadowRoot.innerHTML = `
+    <style>
+        p {
+          color: var(--color);
+        }
+    </style>
+    <p>This is my own element</p>
+`;
+```
+
+---
+
+## Inject Components via Slots
+
+---
+
+```html
+<!-- outsite of the Web-Component -->
+<my-element>
+    <h1 slot="item">Headline from the outsite</h1>
+</my-element>
+```
+
+```js
+// inside of the Web-Component
+<div>
+    <slot name="item"></slot>
+</div>
+```
+
+---
+
+## Events
+
+---
+
+```js
+connectedCallback() {
+  const p = this.shadowRoot.querySelector('p');
+  p.addEventListener('click', () => {
+    this.dispatchEvent(
+      new CustomEvent('custom', {
+        detail: {message: 'a custom event'},
+      }),
+    );
+  });
+}
+```
+
+---
+
+```js
+document.querySelector('my-element')
+  .addEventListener('custom', e =>
+    console.log(e.detail.message),
+);
+```
+
+---
+
+## Extending native elements 
+
+---
+
+```js
+customElements.define('my-button',
+    class extends HTMLButtonElement {
+        constructor() {
+            super();
+        }
+
+        connectedCallback() {
+            console.log('my extended button got rendered');
+            this.addEventListener('click', () => {
+              console.log('clicked');
+            });
+        }
+    }, {extends: 'button'});
+```
+
+---
+
+```html
+<button is="my-button">my-button</button>
+```
+
+---
+
+# LIVE CODING
+
+---
+
+Livecode results can be seen in `/examples/web-components` directory.
+
+---
+
+## Resources
+
+* [https://developer.mozilla.org/en-US/docs/Web/Web_Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components)
+* [https://en.wikipedia.org/wiki/Web_Components](https://en.wikipedia.org/wiki/Web_Components)
+* [https://css-tricks.com/modular-future-web-components/](https://css-tricks.com/modular-future-web-components/)
+
+---
+
+# Thanks!

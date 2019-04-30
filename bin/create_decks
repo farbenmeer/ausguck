@@ -23,6 +23,10 @@ function copy_images () {
     cp -r decks/images ausguck
 }
 
+function copy_examples() {
+    cp -r examples ausguck
+}
+
 function create_index() {
     {
         echo "# All decks from farbenmeer"
@@ -42,3 +46,4 @@ rm -Rf docs
 create_decks
 create_index
 copy_images
+copy_examples
