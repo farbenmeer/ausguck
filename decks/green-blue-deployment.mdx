@@ -1,0 +1,158 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Green & Blue Deployment</title>
+  <meta name="author" content="Marcel Hoppe" />
+</Head>
+
+# Green & Blue Deployment
+
+by Marcel Hoppe
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/Kampfheizung))
+
+---
+
+*"One of the challenges with automating deployment is the cut-over itself, taking software from the final stage of testing to live production. You usually need to do this quickly in order to minimize downtime."*
+
+by Martin Fowler
+
+---
+
+### What will be needed for a "green-blue" deployment approach?
+
+2x server instances that will use the same database, web server and application server
+
+---
+
+### Which different approaches of green-blue deployment exists?
+
+---
+
+#### DNS redirection
+#### Classic Load Balancer
+#### Application Load Balancer
+
+---
+
+### DNS redirection
+
+---
+
+### Pre-condition (DNS redirection)
+
+Two domains inside AWS Route 53 for example:
+
+**main.myservice.api.com**
+
+**pre.myservice.api.com**
+
+---
+
+### Deployment (DNS redirection)
+
+---
+
+Deploy the green stack with the latest build
+
+---
+
+Change the CNAME record inside Route53 (AWS) to redirect to pre.myservice.api.com
+
+Once the switch is complete (it is not instant on every client because we have an ttl on the client that must exceed before the client can reach the new app),
+
+production traffic is diverted to the green stack.
+
+---
+
+### Classic Load Balancer (AWS)
+
+---
+
+### Pre-condition (Classic Load Balancer)
+
+Two domains inside AWS Route 53 for example:
+
+**main.myservice.api.com**
+
+**pre.myservice.api.com**
+
+The two ELB's main and pre configured as alias respectively
+
+Production is currently live with main.myservice.api.com serving requests
+
+---
+
+### Deployment (Classic Load Balancer)
+
+---
+
+Deploy the green stack with the latest build
+
+---
+
+Run automated tests on the green stack by calling the pre.myservice.api.com
+
+---
+
+Register the ELB-Main with the green stack and deregister the older blue stack. 
+
+Once the switch is complete (it is not instant because AWS Connection draining waits for in-flight requests to finish), 
+
+production traffic is diverted to the green stack.
+
+---
+
+### Application Load Balancer (AWS)
+
+---
+
+### Pre-condition (Application Load Balancer)
+
+Two domains inside AWS Route 53 for example:
+
+**main.myservice.api.com**
+
+**pre.myservice.api.com**
+
+2 Target groups for the blue and green environment
+
+A single ALB with multiple listener rules configured
+
+- Configure host-header as main.myservice.api.intuit.com and forward to TargetGroup-Blue.
+- Configure host-header as pre.myservice.api.intuit.com and forward to TargetGroup-Green.
+
+---
+
+### Deployment (Application Load Balancer)
+
+---
+
+Deploy the green stack with the latest build
+
+---
+
+Run automated tests on the green stack by calling the pre.myservice.api.com
+
+---
+
+Modify the host condition in Listener Rule 2 to main.myservice.api.intuit.com.
+
+---
+
+Reorder the priority of rules to ensure that Listener Rule 2 takes higher precedence over Listener Rule 1. 
+
+At this point, your live production traffic will be forwarded to the Green stack as Listener Rule 2 is evaluated first in the order.
+
+---
+
+Modify the host condition in Listener Rule 1 to pre.myservice.api.intuit.com.
+
+---
+
+How much downtime do we have?
+
+---
+
+![zero downtime](https://media.giphy.com/media/8FflcgoNqU0VuBsQnM/giphy.gif)
