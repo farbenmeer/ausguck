@@ -4,6 +4,7 @@
 * [dynamic-programming](dynamic-programming)
 * [elm](elm)
 * [git-commits-versioning](git-commits-versioning)
+* [green-blue-deployment](green-blue-deployment)
 * [higher-order-components](higher-order-components)
 * [imperative-vs-declarative](imperative-vs-declarative)
 * [map-filter-reduce](map-filter-reduce)
