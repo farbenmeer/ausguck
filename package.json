@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@mdx-deck/themes": "^2.3.2",
-    "mdx-deck": "^2.3.2",
+    "mdx-deck": "^3.0.0",
     "react-syntax-highlighter": "^11.0.0"
   }
 }
