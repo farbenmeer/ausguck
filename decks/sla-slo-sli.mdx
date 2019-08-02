@@ -1,0 +1,71 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>SLO, SLI and SLA</title>
+  <meta name="author" content="Marcel Hoppe" />
+</Head>
+
+# SLO, SLI and SLA
+
+by Marcel Hoppe  
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/kampfheizung))
+
+---
+
+- SLO or service level object is a goal that service provider wants to reach.
+- SLA or service level agreement is a contract that the service provider promises  
+	customers on service availability, performance, etc.
+- SLI or service level indicator is a measurement the service provider uses for the goal.
+
+---
+
+# SLO
+
+Every service should have an availability SLO—without it, your team and your stakeholders  
+cannot make principled judgments about whether your service needs to be made more reliable  
+(increasing cost and slowing development) or less reliable (allowing greater velocity of development).
+
+---
+
+# Example SLO
+
+99% availability — 1.68 hours downtime per week
+
+"Within Google, we implement periodic downtime in some services to prevent a service from being overly available."
+
+---
+
+# SLA
+
+If money is involved, we need to specify in the contract how available the customer can expect  
+the service to be, and what happens if we breach that agreement. But keep in mind that the  
+internal SLO is in most cases not the SLO that is defined in the SLA
+
+---
+
+# Example SLA
+
+99% availability - if it is below 99% we'll refund 2000 Euros; if it drops below 80% then, we'll refund 5000 Euros
+
+---
+
+# SLI
+
+Choosing too many indicators makes it hard to pay the right level of attention to the indicators  
+that matter, while choosing too few may leave significant behaviors of your system unexamined.
+
+---
+
+# Example SLI
+
+- How frequently measurements are made: “Every 10 seconds”
+- How the data is acquired: “Through our monitoring, measured at the server”
+- Which requests are included: “HTTP GETs from monitoring jobs”
+
+---
+
+If you’re building a system from scratch, make sure that SLIs, SLOs and SLAs are part of your  
+system requirements. If you already have a production system but don’t have them clearly defined  
+then that’s your highest priority work.
