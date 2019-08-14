@@ -11,6 +11,7 @@
 * [map-filter-reduce](map-filter-reduce)
 * [use-effect-hook](use-effect-hook)
 * [web-components](web-components)
+* [web-worker](web-worker)
 
 
 [farbenmeer.de](https://www.farbenmeer.de)
