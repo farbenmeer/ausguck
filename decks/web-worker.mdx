@@ -1,0 +1,121 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Web Worker</title>
+</Head>
+
+# Web Worker
+
+
+by Max Strübing  
+([twitter](https://twitter.com/mxstrbng), [github](https://github.com/mstruebing))
+
+---
+
+Runs scripts in the background
+
+---
+
+Not in the main thread
+
+---
+
+No blocking
+
+---
+
+Stay responsive during expensive calculations
+
+---
+
+No access to the DOM
+
+---
+
+Communication via messages
+
+---
+
+```
+const browserSupportsWebWorkers = 
+    () => typeof window.Worker === "function";
+```
+
+---
+
+Every major browser
+
+---
+
+```
+// main.js
+const worker = new Worker('worker.js');
+```
+
+---
+
+```
+// main.js
+const MY_PAYLOAD = { payload: "SOME_STRING" };
+worker.postMessage(MY_PAYLOAD);
+```
+
+---
+
+```
+// main.js
+worker.onmessage = event => {
+    console.log(event);
+    // do Stuff
+};
+```
+
+---
+
+```
+// main.js
+worker.terminate();
+```
+
+---
+
+```
+// worker.js
+onmessage = event => {
+  console.log(event.data);
+  // do complex stuff
+  postMessage(result);
+};
+```
+
+---
+
+```
+// worker.js
+onmessage = ({data}) => {
+  console.log(data)
+  // do complex stuff
+  postMessage(result);
+}
+```
+
+---
+
+## DEMO
+
+https://farbenmeer.github.io/ausguck/examples/web-worker/index.html
+
+---
+
+## Resources
+
+* https://en.wikipedia.org/wiki/Web_worker
+* https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API
+* https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers
+
+---
+
+# Thanks!
+
