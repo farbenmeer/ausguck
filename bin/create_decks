@@ -34,7 +34,7 @@ function create_index() {
         if [[ "$deck" == "sample" ]]; then
             continue
         fi
-        printf "* ["$deck"]("$deck")\n"
+        printf "* [%s](%s)\n" "$deck" "$deck"
         done
 
         printf "\n\n[farbenmeer.de](https://www.farbenmeer.de)"
