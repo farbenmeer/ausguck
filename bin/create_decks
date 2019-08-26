@@ -2,11 +2,19 @@
 
 set -e
 
-readonly DECKS=$(find ./decks/ -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
+readonly DECKS=$(find ./decks/ -type f -name '*.mdx')
+readonly DECK_NAMES=$(find ./decks/ -type f -name '*.mdx' | sed 's/\.\/.*\/\(.*\)\.mdx$/\1/g' | sort)
 
+function prefix_images_with_ausguck() {
+    sed -i 's#/images/#ausguck/images/##' $DECKS
+}
+
+function checkout_decks() {
+    git checkout -- $DECKS
+}
 
 function create_decks() {
-    for deck in $DECKS; do
+    for deck in $DECK_NAMES; do
         if [[ "$deck" == "sample" ]]; then
             continue
         fi
@@ -30,11 +38,11 @@ function copy_examples() {
 function create_index() {
     {
         echo "# All decks from farbenmeer"
-        for deck in $DECKS; do
+        for deck in $DECK_NAMES; do
         if [[ "$deck" == "sample" ]]; then
             continue
         fi
-        printf "* ["$deck"]("$deck")\n"
+        printf "* [%s](%s)\n" "$deck" "$deck"
         done
 
         printf "\n\n[farbenmeer.de](https://www.farbenmeer.de)"
@@ -43,7 +51,9 @@ function create_index() {
 }
 
 rm -Rf docs
+prefix_images_with_ausguck
 create_decks
+checkout_decks
 create_index
 copy_images
 copy_examples
