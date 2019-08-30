@@ -1,0 +1,73 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>CORS (cross-origin resource sharing)</title>
+  <meta name="author" content="Marcel Hoppe" />
+</Head>
+
+# Cross-origin resource sharing
+
+by Marcel Hoppe
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/Kampfheizung))
+
+---
+
+Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources on 
+a web page to be requested from another domain outside the domain from which the first 
+resource was served.
+
+---
+
+Long Story short
+
+Example:
+
+farbenmeer.de want's to make a POST request to prismic.io
+
+---
+
+Normaly this request would fail if the Access-Control-Allow-Origin header does not set 
+the value farbenmeer.de within the response from the preflight request
+
+---
+
+Why is this necessary?
+
+---
+
+Reason 1: cookies
+
+Browser often send your cookies with http requests. Maybe you don't want evil.com to be
+able to make a request to bank.com using your login cookies.
+
+---
+
+Reason 2: network access
+
+You might be on a private network (farbenmeer corporate network) that evil.com doesn't
+have access to, but your computer does.
+
+---
+
+Which requests will fail and which not?
+
+---
+
+Methods with mandatory preflight request
+
+	- PUT
+	- DELETE
+	- CONNECT
+	- OPTIONS
+	- TRACE
+	- PATCH
+
+---
+
+Methods without mandatory preflight request
+
+	- GET
+	- HEAD
+	- POST
