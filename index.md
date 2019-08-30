@@ -1,5 +1,6 @@
 # All decks from farbenmeer
 * [async-javascript](async-javascript)
+* [cors](cors)
 * [currying](currying)
 * [dynamic-programming](dynamic-programming)
 * [elm](elm)
