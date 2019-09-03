@@ -12,6 +12,9 @@ jobs:
       - run:
           name: Build pages
           command: bin/create_decks 
+      - run:
+          name: Place circleci config
+          command: mkdir ausguck/.circleci && cp .circleci/config.yml ausguck/.circleci/config.yml
       - persist_to_workspace:
           root: /root/project
           paths: 
