@@ -11,6 +11,7 @@
 * [imperative-vs-declarative](imperative-vs-declarative)
 * [map-filter-reduce](map-filter-reduce)
 * [service-worker](service-worker)
+* [solid](solid)
 * [use-effect-hook](use-effect-hook)
 * [web-components](web-components)
 * [web-worker](web-worker)
