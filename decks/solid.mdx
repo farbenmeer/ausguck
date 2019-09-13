@@ -1,0 +1,404 @@
+import { Head } from 'mdx-deck'
+
+import myTheme from '../theme'
+
+export const theme = myTheme
+
+<Head>
+  <title>SOLID Principle</title>
+  <meta name="author" content="Marcel Hoppe" />
+</Head>
+
+# SOLID Principle
+
+by Marcel Hoppe
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/Kampfheizung))
+
+---
+
+**S**
+
+**O**
+
+**L**
+
+**I**
+
+**D**
+
+---
+
+**S** ingle Responsibility Principle
+
+**O**
+
+**L**
+
+**I**
+
+**D**
+
+---
+
+## Single Responsibility Principle
+
+A class should take care of a Single Responsibility
+
+---
+
+## Single Responsibility Principle
+
+Bad example
+
+```ruby
+class Customer
+  def add(db)
+    begin
+      db.add();
+    rescue StandardError => e
+      File.open('error.txt', r) do |file| 
+        file.puts e.message
+      end
+  end
+end
+```
+
+---
+
+## Single Responsibility Principle
+
+Good example
+
+```ruby
+class Customer
+  def add(db)
+    begin
+      db.add();
+    rescue StandardError => e
+      logger.handle(e.message)
+  end
+
+  private
+
+  def logger
+    FileLogger.new
+  end
+end
+
+class FileLogger
+  def handle(text)
+    File.open('error.txt', r) do |file| 
+      file.puts text
+    end
+  end
+end
+```
+
+---
+
+**S** ingle Responsibility Principle
+
+**O** pen for Extension Closed for Modification
+
+**L**
+
+**I**
+
+**D**
+
+---
+
+## Open for Extension Closed for Modification
+
+Prefer extension over modification
+
+---
+
+## Open for Extension Closed for Modification
+
+Bad example
+
+```ruby
+class Customer
+  attr_accessor :type
+
+  def initialize(type)
+    @type = type
+  end
+
+  def add(db)
+    if (@type == 0)
+      db.add();
+    else
+      db.addExistingCustomer();
+    end
+  end
+end
+```
+
+---
+
+## Open for Extension Closed for Modification
+
+Good example
+
+```ruby
+class Customer
+  def add(db)
+    db.add();
+  end
+end
+
+class ExistingCustomer < Customer
+  def add(db)
+    db.addExistingCustomer();
+  end
+end
+```
+
+---
+
+**S** ingle Responsibility Principle
+
+**O** pen for Extension Closed for Modification
+
+**L** iskov Substitution Principle
+
+**I**
+
+**D**
+
+---
+
+## Liskov Substitution Principle
+
+The parent class should be able to refer child objects seamlessly during runtime polymorphism.
+
+---
+
+## Liskov Substitution Principle
+
+Bad example
+
+```ruby
+class Human
+  def talk
+    'Foo'
+  end
+
+  def height
+    '2.80m'
+  end
+end
+
+class HomoSapiens < Human
+  def talk
+    'Hello!'
+  end
+
+  def height
+    { men: '1.70m', women: '1.62' }
+  end
+end
+```
+
+---
+
+## Liskov Substitution Principle
+
+Good example
+
+if it looks like a duck and quacks like a duck, it's a duck
+
+```ruby
+class HomoSapiens < Human
+  def talk
+    'Hello!'
+  end
+
+  def height
+    '1.70m'
+  end
+end
+```
+
+---
+
+**S** ingle Responsibility Principle
+
+**O** pen for Extension Closed for Modification
+
+**L** iskov Substitution Principle
+
+**I** nterface Segregation Principle
+
+**D**
+
+---
+
+## Interface Segregation Principle
+
+A client should not be forced to use an interface, if it doesn’t need it.
+
+---
+
+## Interface Segregation Principle
+
+```ruby
+class FeeCalculator
+  def calculate(product, user, vat)
+    # calculation
+  end
+end
+
+class ProductController
+  def show
+    @fee = FeeCalculator.new.calculate(product, user, vat)
+  end
+end
+```
+
+---
+
+## Interface Segregation Principle
+
+Bad example
+
+```ruby
+class FeeCalculator
+  def calculate(product, user, vat, save_result)
+    # calculation
+
+    if save_result
+      # storing result into db
+    end
+  end
+end
+
+class ProductController
+  def show
+    @fee = FeeCalculator.new.calculate(product, user, vat, false)
+  end
+end
+
+class OrderController
+  def create
+    @fee = FeeCalculator.new.calculate(product, user, vat, true)
+  end
+end
+```
+
+---
+
+## Interface Segregation Principle
+
+Good Example
+
+```ruby
+class FeeCalculator
+  def calculate(product, user, vat)
+    # calculation
+  end
+
+  def save(fee)
+    # storing result into db
+  end
+end
+
+class ProductController
+  def show
+    @fee = fee_calculator.calculate(product, user, vat)
+  end
+
+  private
+
+  def fee_calculator
+    FeeCalculator.new
+  end
+end
+
+class OrderController
+  def create
+    fee = fee_calculator.calculate(product, user, vat)
+    fee_calculator.save(fee)
+  end
+
+  private
+
+  def fee_calculator
+    FeeCalculator.new
+  end
+end
+```
+
+---
+
+**S** ingle Responsibility Principle
+
+**O** pen for Extension Closed for Modification
+
+**L** iskov Substitution Principle
+
+**I** nterface Segregation Principle
+
+**D** ependency Inversion
+
+---
+
+## Dependency Inversion
+
+High level modules should not depend on low-level modules, but should depend on abstraction.
+
+---
+
+## Dependency Inversion
+
+<img src="/images/solid/domain-driven-hexagon.png" />
+
+---
+
+## Dependency Inversion
+
+Bad example
+
+```ruby
+class UserRepository
+  def all
+    User.all
+  end
+
+  def find(id:)
+    User.find(id)
+  end
+end
+```
+
+---
+
+## Dependency Inversion
+
+Good example
+
+```ruby
+class UserRepository
+  def initialize(data_source:)
+    @data_source = data_source
+  end
+
+  def all
+    data_source.all
+  end
+
+  def find(id:)
+    data_source.find(id)
+  end
+
+  private
+
+  attr_reader :data_source
+end
+```
+
+---
+
+Thank you for listening! You're awesome!
