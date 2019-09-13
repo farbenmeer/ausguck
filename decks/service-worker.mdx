@@ -1,0 +1,147 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Service Worker</title>
+  <meta name="author" content="Tobias Linkohr" />
+</Head>
+
+# Service Worker
+
+by Tobias Linkohr  
+([github](https://github.com/Tobi-mmt))
+
+
+---
+
+# What is it?
+programmable network proxy
+
+---
+<img src="/images/service-worker/sw.jpeg" />
+
+---
+
+# what can we do ?
+
+- receive push notifications
+- use app offline
+- cache management
+
+---
+
+# Good to know
+
+- The Service Worker runs in its __own global script context__
+- It isn’t tied to a specific web page
+- It __can't__ access the DOM
+
+---
+
+# Lifecycle
+
+<img src="/images/service-worker/lifecycle.png" />
+
+---
+
+# use a service-worker (sw) 
+# step by step
+
+---
+
+# 1. Register SW
+
+```js
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful');
+    }, function(err) {
+      // Registration failed
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+```
+---
+
+# 2. Activate SW
+
+Browser activates the SW after installation
+
+
+---
+
+<img src="/images/service-worker/waiting.png" />
+
+
+---
+
+# 3. Use SW
+
+Write SW with workbox
+
+```js
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js")
+
+workbox.skipWaiting()
+
+...
+
+// 'network first' for all js file requests
+workbox.routing.registerRoute("**/*.js", workbox.strategies.networkFirst(), 'GET')
+```
+
+---
+
+Inside your js APP (client)
+
+```js
+subscribeToNotifications = async () => {
+  const registration = await navigator.serviceWorker.ready;
+
+  firebase.initializeApp({ messagingSenderId: "****" })
+
+  const messaging = firebase.messaging()
+
+  messaging.onMessage(payload =>
+    console.log('receive foreground message')
+  );
+
+  if (registration) {
+    // handels background messages
+    messaging.useServiceWorker(registration);
+  }
+
+  return messaging
+    .requestPermission()
+    .catch(e => {
+      console.error(e);
+    });
+};
+```
+
+---
+
+# Good to know 2
+
+- SW can't be older then 24h (autoupdate from Browser)
+- HTTPS is required
+
+---
+
+# great examples
+
+[Towergame](https://www.towergame.app/)
+
+[Pinterest](https://www.pinterest.de/)
+
+---
+
+# Resources:
+
+- [(MDN) Using Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+- [Workbox Docs](https://developers.google.com/web/tools/workbox/guides/get-started)
+- [(Google) Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers/)
