@@ -10,6 +10,7 @@
 * [higher-order-components](higher-order-components)
 * [imperative-vs-declarative](imperative-vs-declarative)
 * [map-filter-reduce](map-filter-reduce)
+* [reduxjs](reduxjs)
 * [service-worker](service-worker)
 * [solid](solid)
 * [use-effect-hook](use-effect-hook)
