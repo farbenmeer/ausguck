@@ -1,0 +1,319 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Redux</title>
+  <meta name="author" content="Max Strübing" />
+</Head>
+
+# Redux!
+
+by Max Strübing  
+([twitter](https://twitter.com/mxstrbng), [github](https://github.com/mstruebing))
+
+---
+
+What is Redux?
+
+---
+
+"Redux is a predictable state container for JavaScript apps."  
+(official redux documentation)
+
+---
+
+Holds your overall application state
+
+---
+
+Single source of truth
+
+---
+
+Predictable, synchronous data flow
+
+---
+
+Offers a pure, functional way to manipulate the state
+
+---
+
+Easy testing
+
+---
+
+integrates well in react (and other view libraries as I've heard)
+
+---
+
+Inspired by Elm (it is in fact the Elm-Architecture)
+
+---
+
+<img src="/images/redux/redux.png" />
+
+---
+
+The **store** contains the application state
+
+---
+
+```js
+{
+  todos: ['Learn Redux', 'Drink Beer'];
+}
+```
+
+---
+
+An **action** defines what and how a part of the store should be changed
+
+---
+
+```js
+{
+  type: 'ADD_TODO';
+  payload: 'Learn Redux';
+}
+```
+
+---
+
+A **reducer** takes an action and the current state and produces a **_new_** state
+
+---
+
+```js
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {
+        todos: [...state.todos, action.payload],
+      };
+    default:
+      return state;
+  }
+};
+```
+
+---
+
+How to integrate that store thingy with react?
+<img src="https://media.giphy.com/media/cMVgEhDeKzPwI/giphy.gif" />
+
+---
+
+Boilerplate
+<img src="https://media.giphy.com/media/MRqaXgJUl9fGE1PSy6/giphy.gif" />
+
+---
+
+```js
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+```
+
+---
+
+```js
+const initialState = {todos: []};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {todos: [...state.todos, action.payload]};
+    default:
+      return state;
+  }
+};
+```
+
+---
+
+```js
+const store = createStore(reducer);
+```
+
+---
+
+```js
+const App = () => (
+  <Provider store={store}>
+    <MyComponent />
+  </Provider>
+);
+```
+
+---
+
+Connect your component \o/
+<img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif" />
+
+---
+
+Use the state
+
+---
+
+```js
+import {connect} from 'react-redux';
+
+class MyClass extends React.PureComponent {
+  // some cool code
+  render() {
+    return (
+      <ul>
+        {this.props.todos.map(todo => (
+          <li>{todo}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    todos: state.todos,
+  };
+};
+
+export default connect(mapStateToProps)(MyClass);
+```
+
+---
+
+Dispatch an action
+
+---
+
+```js
+class MyClass extends React.PureComponent {
+  doStuff() {
+    this.props.dispatch({
+      type: 'ADD_TODO',
+      payload: 'Learn Redux',
+    });
+  }
+  render() {
+    return <div>{this.props.count}</div>;
+  }
+}
+```
+
+---
+
+## Demo
+
+<img src="https://media.giphy.com/media/YQitE4YNQNahy/giphy.gif" />
+
+
+(see code on Github: [https://github.com/mstruebing/redux-example](https://github.com/mstruebing/redux-example))
+---
+
+What about side effects?
+
+---
+
+[redux-thunk](https://github.com/reduxjs/redux-thunk)
+
+---
+
+A middleware which can call side effects before invoking `dispatch`
+
+---
+
+```js
+// other action creaters ...
+const incrementAsync() {
+  return (dispatch) => {
+    setTimeout(() => {
+      // Yay! Can invoke sync or async actions with `dispatch`
+      dispatch(increment());
+    }, 1000);
+  };
+}
+```
+
+---
+
+```
+npm install redux-thunk
+```
+
+---
+
+```js
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './reducers';
+
+const store = createStore(reducer, applyMiddleware(thunk));
+```
+
+---
+
+[redux-saga](https://github.com/redux-saga/redux-saga)
+
+---
+
+Uses generator functions and hooks between the reducer and actions
+
+---
+
+```js
+function* mySaga() {
+  // there are also some other takers
+  yield takeEvery("MY_ACTION", mySideEffect); 
+}
+
+function* mySideEffect(action) {
+   try {
+      const user = yield call(Api.doHttpRequest, action.payload.somePayload);
+      yield put({type: "HTTP_REQUEST_SUCCEEDED", payload: payload});
+   } catch (e) {
+      yield put({type: "HTTP_REQUEST_FAILED", message: e.message});
+   }
+}
+```
+
+---
+
+```
+npm install --save redux-saga
+```
+
+---
+
+```js
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+
+import reducer from './reducers'
+import mySaga from './sagas'
+
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware()
+// mount it on the Store
+const store = createStore(
+  reducer,
+  applyMiddleware(sagaMiddleware)
+)
+
+// then run the saga
+sagaMiddleware.run(mySaga)
+
+// render the application
+```
+
+---
+
+THX!!11
+
+<img src="https://media.giphy.com/media/3oEdva9BUHPIs2SkGk/giphy.gif" />
+
+---
+
+resources:
+
+[official redux documentation](https://redux.js.org/)
