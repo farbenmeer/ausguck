@@ -1,6 +1,8 @@
 import { Head } from 'mdx-deck'
 
-export { default as theme } from '../theme'
+import myTheme from '../theme'
+
+export const theme = myTheme
 
 <Head>
   <title>CORS (cross-origin resource sharing)</title>
@@ -57,17 +59,21 @@ Which requests will fail and which not?
 
 Methods with mandatory preflight request
 
-	- PUT
-	- DELETE
-	- CONNECT
-	- OPTIONS
-	- TRACE
-	- PATCH
+```
+PUT
+DELETE
+CONNECT
+OPTIONS
+TRACE
+PATCH
+```
 
 ---
 
 Methods without mandatory preflight request
 
-	- GET
-	- HEAD
-	- POST
+```
+GET
+HEAD
+POST
+```
