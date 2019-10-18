@@ -1,0 +1,98 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Simple SQL evaluation</title>
+  <meta name="author" content="Marcel Hoppe" />
+</Head>
+
+# Simple SQL evaluation
+
+by Marcel Hoppe
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/Kampfheizung))
+
+---
+
+# SQL queries don't start with SELECT
+(reference: [julia evans](https://jvns.ca/blog/2019/10/03/sql-queries-don-t-start-with-select/))
+
+---
+
+### How do you think get this sql statement evaluated?
+
+```sql
+SELECT name, weight FROM cats WHERE weight > 9;
+```
+
+---
+
+### First
+
+```sql
+FROM cats
+```
+
+---
+
+### Second
+
+```sql
+WHERE weight > 9
+```
+
+---
+
+### Last
+
+```sql
+SELECT name, weight
+```
+
+---
+
+`=> Garfield` 😸
+
+![](https://media.giphy.com/media/QvwMDYpAMUm6Q/giphy.gif)
+
+---
+
+# 🤔
+
+### But now you think - "what about column aliases?"
+
+---
+
+```sql
+SELECT CONCAT(first_name, ' ', last_name) AS fat_cat, weight
+FROM cat
+WHERE weight > 9
+GROUP BY fat_cat
+```
+
+---
+
+# 🤔
+
+### "This query makes it look like GROUP BY happens after SELECT even though GROUP BY is first, 
+
+### because the GROUP BY references an alias from the SELECT."
+
+---
+
+![](https://media.giphy.com/media/hPPx8yk3Bmqys/giphy.gif)
+
+---
+
+### Database engines can just rewrite the query as
+
+```sql
+SELECT CONCAT(first_name, ' ', last_name) AS fat_cat, weight
+FROM cat
+WHERE weight > 9
+GROUP BY CONCAT(first_name, ' ', last_name)
+```
+
+---
+
+# Thanks for listening 👏🏻
