@@ -12,6 +12,7 @@
 * [map-filter-reduce](map-filter-reduce)
 * [reduxjs](reduxjs)
 * [service-worker](service-worker)
+* [simple-sql-evaluation](simple-sql-evaluation)
 * [solid](solid)
 * [use-effect-hook](use-effect-hook)
 * [web-components](web-components)
