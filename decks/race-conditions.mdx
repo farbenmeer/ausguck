@@ -1,0 +1,173 @@
+import { Head } from 'mdx-deck'
+
+export { default as theme } from '../theme'
+
+<Head>
+  <title>Race Conditions</title>
+</Head>
+
+# Race Conditions
+
+
+Max Strübing  
+([twitter](https://twitter.com/mxstrbng), [github](https://github.com/mstruebing))
+
+---
+
+What exactly is a race condition?
+
+---
+
+A race condition occurs when two or more threads can access shared data and they try to change it at the same time.
+
+---
+
+## Synchronous
+
+| Thread 1 | Thread 2 |   | Value |
+|----------|----------|---|-------|
+|          |          |   |   0   |
+|  read    |          | ← |   0   |
+| increase |          |   |   0   |
+|  write   |          | → |   1   |
+|          |   read   | ← |   1   |
+|          | increase |   |   1   |
+|          |   write  | → |   2   |
+
+---
+
+## Asynchronous
+
+| Thread 1 | Thread 2 |   | Value |
+|----------|----------|---|-------|
+|          |          |   |   0   |
+|  read    |          | ← |   0   |
+|          |   read   | ← |   0   |
+| increase |          |   |   0   |
+|          | increase |   |   0   |
+|  write   |          | → |   1   |
+|          |   write  | → |   1   |
+
+---
+
+## Example of a linked list
+
+---
+
+Refresher on Linkedlists:
+
+```
+Node {
+    value 
+    *next
+}
+```
+
+<img width="1000px" src="/images/race-conditions/Singly-linked-list.svg" />
+
+---
+
+We want to remove two items from a linked list
+
+---
+
+<img src="/images/race-conditions/linked_list_1.png" />
+
+---
+
+<img src="/images/race-conditions/linked_list_1.png" />  
+<img src="/images/race-conditions/linked_list_2.png" />
+
+---
+
+<img src="/images/race-conditions/linked_list_1.png" />  
+<img src="/images/race-conditions/linked_list_2.png" />  
+<img src="/images/race-conditions/linked_list_3.png" />
+
+---
+
+## Solution: Locks
+
+---
+
+```
+if (x == 5) {
+   // If another thread changed x in between 
+   // "if (x == 5)" and "y = x * 2" above,
+   // y will not be equal to 10.
+   y = x * 2; 
+}
+```
+
+---
+
+```
+// Obtain lock for x
+if (x == 5) {
+   // Now, nothing can change x until the lock is released. 
+   // Therefore y = 10
+   y = x * 2; 
+}
+// release lock for x
+
+```
+
+---
+
+In `C` there is: `mlock(*address, length)` and `mlockall(flags)`
+as well as corresponding `munlock` and `munlockall`.  
+More modern languages like Rust for example doesn't need this.
+
+---
+
+This can also affect javascript with async code, a solution for this would be 
+[async-lock](https://www.npmjs.com/package/async-lock)
+
+---
+
+```
+redis.get('key', function(err, value) {
+    redis.set('key', value * 2);
+});
+```
+
+---
+
+```
+user1: redis.get('key') -> 1
+user2: redis.get('key') -> 1
+user1: redis.set('key', 1 x 2) -> 2
+user2: redis.set('key', 1 x 2) -> 2
+```
+
+---
+
+```
+var AsyncLock = require('async-lock');
+var lock = new AsyncLock();
+
+const multiplyValueFromRedis = async (key, callback) => {
+    lock.acquire(key, () => {
+    // no other can obtain the same lock at the same time
+        redis.get(key, (err, value) => {
+            redis.set(key, value * 2, callback);
+        });
+    }, (err, ret) => {
+    // do something when no lock can be obtained
+    });
+}
+
+await myAsyncFunc();
+```
+
+---
+
+Some Links:
+
+* https://en.wikipedia.org/wiki/Race_condition
+* https://linux.die.net/man/2/mlock
+* https://www.npmjs.com/package/async-lock
+
+---
+
+Thank you
