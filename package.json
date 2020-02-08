@@ -17,7 +17,7 @@
     "url": "https://github.com/farbenmeer/ausguck.git"
   },
   "devDependencies": {
-    "@mdx-deck/themes": "2.5.0",
+    "@mdx-deck/themes": "3.1.0",
     "mdx-deck": "2.5.1",
     "react-syntax-highlighter": "11.0.2"
   }
