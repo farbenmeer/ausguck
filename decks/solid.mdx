@@ -1,8 +1,9 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import domainDrivenHexagon from './images/solid/domain-driven-hexagon.png'
 
-import myTheme from '../theme'
+import customTheme from '../theme'
 
-export const theme = myTheme
+export const theme = customTheme
 
 <Head>
   <title>SOLID Principle</title>
@@ -353,7 +354,7 @@ High level modules should not depend on low-level modules, but should depend on 
 
 ## Dependency Inversion
 
-<img src="/images/solid/domain-driven-hexagon.png" />
+<Image src={domainDrivenHexagon} style={{ backgroundSize: 'auto' }}/>
 
 ---
 

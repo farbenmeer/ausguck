@@ -1,6 +1,11 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import example from './images/higher-order-components/example.png'
+import example2 from './images/higher-order-components/example2-1.png'
+import example3 from './images/higher-order-components/example2-2.png'
 
-export { default as theme } from '../theme'
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Higher Order Components</title>
@@ -131,7 +136,7 @@ class App extends Component {
 
 ---
 
-<img src="/images/higher-order-components/example.png" />  
+<Image src={example} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -174,11 +179,11 @@ const enhanceWithBackgroundHover = Component => color => {
 
 ---
 
-<img src="/images/higher-order-components/example2-1.png" />  
+<Image src={example2} style={{ backgroundSize: 'auto' }} />
 
 -----
 
-<img src="/images/higher-order-components/example2-2.png" />  
+<Image src={example3} style={{ backgroundSize: 'auto' }} />
 
 ---
 

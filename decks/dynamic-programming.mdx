@@ -1,6 +1,9 @@
-import { Head } from 'mdx-deck'
+import { Head, Image, Steps } from 'mdx-deck'
+import fib5Recursive from './images/dynamic-programming/fib5-recursive.png'
 
-export { default as theme } from '../theme'
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Dynamic Programming</title>
@@ -98,7 +101,7 @@ fib(4) + fib(3)
 
 ---
 
-<img src="/images/dynamic-programming/fib5-recursive.png" />
+<Image src={fib5Recursive} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -226,32 +229,17 @@ const fib = n => {
 ---
 
 Same Computation as memoized but:
+<Steps>
 
----
- 
-Same Computation as memoized but:   
-=> less function calls 
+  => less function calls
 
----
- 
-Same Computation as memoized but:  
-=> less function calls  
-=> less overhead  
+  => less overhead 
 
----
- 
-Same Computation as memoized but:  
-=> less function calls  
-=> less overhead  
-=> less computation power needed 
+  => less computation power needed 
 
----
- 
-Same Computation as memoized but:  
-=> less function calls  
-=> less overhead  
-=> less computation power needed  
-=> faster.
+  => faster.
+
+</Steps>
 
 ---
 

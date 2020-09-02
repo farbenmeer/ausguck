@@ -1,6 +1,43 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import elm from './images/elm/elm.png'
+import elmGoogle from './images/elm/elm-google.png'
+import elmGoogleImages from './images/elm/elm-google-images.png'
+import elmUndefined from './images/elm/undefined.png'
+import jsParts from './images/elm/js-parts.jpg'
+import elmFrontend from './images/elm/frontend.png'
+import delightful from './images/elm/delightful.png'
+import boring from './images/elm/boring.webp'
+import areYouDone from './images/elm/are-you-done.gif'
+import assetSizes from './images/elm/asset-sizes.png'
+import cmd from './images/elm/cmd.png'
+import compilerBranches from './images/elm/compiler-branches.png'
+import compilerListNap from './images/elm/compiler-list-nap.png'
+import compilerTypeComparison from './images/elm/compiler-type-comparison.png'
+import compilerTypeComparison2 from './images/elm/compiler-type-comparison2.png'
+import compilerTypeComparison3 from './images/elm/compiler-type-comparison3.png'
+import compilerTypeComparison4 from './images/elm/compiler-type-comparison4.png'
+import cool from './images/elm/cool.webp'
+import architecture from './images/elm/elm-architecture.png'
+import architectureComplete from './images/elm/elm-architecture-complete.png'
+import architectureProgram from './images/elm/elm-architecture-program.png'
+import elmFormat from './images/elm/elm-format.png'
+import exception from './images/elm/exception.png'
+import exception2 from './images/elm/exception2.png'
+import elmHead from './images/elm/head.png'
+import image5 from './images/elm/image5.png'
+import maintainableUsable from './images/elm/maintainable-usable.png'
+import performance from './images/elm/performance.png'
+import publishing from './images/elm/publishing.png'
+import semver from './images/elm/semver.png'
+import spellcheck from './images/elm/spellcheck.png'
+import spellcheck2 from './images/elm/spellcheck2.png'
+import subscription from './images/elm/subscription.png'
+import surveyResults from './images/elm/survey-results.png'
 
-export { default as theme } from '../theme'
+
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Elm</title>
@@ -14,15 +51,15 @@ by Max Strübing
 
 ---
 
-<img src="/images/elm/elm.png" />
+<Image src={elm} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/elm-google.png" />
+<Image src={elmGoogle} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/elm-google-images.png" />
+<Image src={elmGoogleImages} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -30,11 +67,11 @@ by Max Strübing
 
 ---
 
-<img src="/images/elm/undefined.png" />
+<Image src={elmUndefined} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/js-parts.jpg" />
+<Image src={jsParts} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -46,9 +83,7 @@ Dan Abramov, Author of Redux
 
 ---
 
-<img src="/images/elm/frontend.png" />
-
----
+<Image src={elmFrontend} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -65,7 +100,7 @@ Generate JavaScript with great performance and no runtime exceptions.
 
 ---
 
-<img src="/images/elm/delightful.png" />
+<Image src={delightful} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -103,7 +138,7 @@ Generate JavaScript with **great performance** and **no runtime exceptions** *.
 
 ---
 
-<img src="/images/elm/boring.webp" />
+<Image src={boring} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -113,52 +148,16 @@ Generate JavaScript with **great performance** and **no runtime exceptions** *.
 
 ### Boring facts 1
 
-* Evan Czaplicki - master thesis
-
----
-
-### Boring facts 1
-
-* Evan Czaplicki - master thesis
-* released in 2012
-
----
-
-### Boring facts 1
-
-* Evan Czaplicki - master thesis
-* released in 2012
-* implemented in Haskell
-
----
-
-### Boring facts 1
-
-* Evan Czaplicki - master thesis
-* released in 2012
-* implemented in Haskell
-* latest release 0.19 / August 21, 2018
-
----
-
-### Boring facts 1
-
-* Evan Czaplicki - master thesis
-* released in 2012
-* implemented in Haskell
-* latest release 0.19 / August 21, 2018
-* influenced by: Haskell, Standard ML, OCaml, F#
-
----
-
-### Boring facts 1
-
-* Evan Czaplicki - master thesis
-* released in 2012
-* implemented in Haskell
-* latest release 0.19 / August 21, 2018
-* influenced by: Haskell, Standard ML, OCaml, F#
-* influenced: Redux, Vue.js
+<ul>
+  <Steps>
+    <li>Evan Czaplicki - master thesis</li>
+    <li>released in 2012</li>
+    <li>implemented in Haskell</li>
+    <li>latest release 0.19 / August 21, 2018</li>
+    <li>influenced by: Haskell, Standard ML, OCaml, F#</li>
+    <li>influenced: Redux, Vue.js</li>
+  </Steps>
+</ul>
 
 ---
 
@@ -168,61 +167,25 @@ Generate JavaScript with **great performance** and **no runtime exceptions** *.
 
 ### Boring facts 2
 
-* functional
+<ul>
+  <Steps>
+    <li>functional</li>
+    <li>transpiles to JS</li>
+    <li>statically typed + inferred</li>
+    <li>everything immutable</li>
+    <li>all functions are pure</li>
+    <li>‘null’ / ‘undefined’ / exceptions do not exist</li>
+  </Steps>
+</ul>
 
 ---
 
-### Boring facts 2
-
-* functional
-* transpiles to JS
-
----
-
-### Boring facts 2
-
-* functional
-* transpiles to JS
-* statically typed + inferred
-
----
-
-### Boring facts 2
-
-* functional
-* transpiles to JS
-* statically typed + inferred
-* everything immutable
-
----
-
-### Boring facts 2
-
-* functional
-* transpiles to JS
-* statically typed + inferred
-* everything immutable
-* all functions are pure
-
----
-
-### Boring facts 2
-
-* functional
-* transpiles to JS
-* statically typed + inferred
-* everything immutable
-* all functions are pure
-* ‘null’ / ‘undefined’ / exceptions do not exist
-
----
-
-<img src="/images/elm/survey-results.png" />  
+<Image src={surveyResults} style={{ backgroundSize: 'auto' }} />
 <small>https://ashleynolan.co.uk/blog/frontend-tooling-survey-2018-results</small>
 
 ---
 
-<img src="/images/elm/maintainable-usable.png" />
+<Image src={maintainableUsable} style={{ backgroundSize: 'auto' }} />
 <small>http://guupa.com/elm-presentation/</small>
 
 ---
@@ -231,18 +194,18 @@ Generate JavaScript with **great performance** and **no runtime exceptions** *.
 
 ---
 
-<img src="/images/elm/cool.webp" />
+<Image src={cool} style={{ backgroundSize: 'auto' }} />
 
 ---
 
 # Performance
-<img src="/images/elm/performance.png" />  
+<Image src={performance} style={{ backgroundSize: 'auto' }} />
 <small>https://elm-lang.org/blog/blazing-fast-html-round-two</small>
 
 ---
 
 # Asset Size
-<img src="/images/elm/asset-sizes.png" />  
+<Image src={assetSizes} style={{ backgroundSize: 'auto' }} /> 
 <small>https://elm-lang.org/blog/small-assets-without-the-headache</small>
 
 
@@ -252,27 +215,27 @@ Generate JavaScript with **great performance** and **no runtime exceptions** *.
 
 ---
 
-<img src="/images/elm/compiler-list-nap.png" />  
+<Image src={compilerListNap} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/compiler-branches.png" />  
+<Image src={compilerBranches} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/compiler-type-comparison.png" />  
+<Image src={compilerTypeComparison} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/compiler-type-comparison2.png" />  
+<Image src={compilerTypeComparison2} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/compiler-type-comparison3.png" />  
+<Image src={compilerTypeComparison3} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/compiler-type-comparison4.png" />  
+<Image src={compilerTypeComparison4} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -280,15 +243,15 @@ Generate JavaScript with **great performance** and **no runtime exceptions** *.
 
 ---
 
-<img src="/images/elm/exception.png" />  
+<Image src={exception} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/exception2.png" />  
+<Image src={exception2} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/head.png" />  
+<Image src={elmHead} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -306,12 +269,11 @@ Debug.crash "WHOOPS"
 
 ---
 
-<img src="/images/elm/semver.png" />  
+<Image src={semver} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-
-<img src="/images/elm/publishing.png" />  
+<Image src={publishing} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -333,19 +295,13 @@ initialModel =
 
 ---
 
-* whitespace greedy
-
----
-
-* whitespace greedy
-* hates parenthesis
-
----
-
-* whitespace greedy
-* hates parenthesis
-* `,` on the next line
-
+<ul>
+  <Steps>
+    <li>whitespace greedy</li>
+    <li>hates parenthesis</li>
+    <li>`,` on the next line</li>
+  </Steps>
+</ul>
 
 ---
 
@@ -475,6 +431,7 @@ initialModel =
 | Types(Typescript/Flow) | Built in |
 | Linter(eslint,xo) | Built in |
 | Code-Style(Prettier,Standard) | |
+
 ---
 
 | JavaScript | Elm |
@@ -527,7 +484,7 @@ https://github.com/halfzebra/create-elm-app
 
 ---
 
-<img src="/images/elm/are-you-done.gif" />
+<Image src={areYouDone} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -539,23 +496,23 @@ But first, the Elm-Architecure
 
 ---
 
-<img src="/images/elm/elm-architecture.png" />
+<Image src={architecture} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/elm-architecture-program.png" />
+<Image src={architectureProgram} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/elm-architecture-complete.png" />
+<Image src={architectureComplete} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/subscription.png" />
+<Image src={subscription} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/cmd.png" />
+<Image src={cmd} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -597,11 +554,11 @@ app.ports.setTitle.subscribe(title => {
 
 ---
 
-<img src="/images/elm/spellcheck.png" />
+<Image src={spellcheck} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/elm/spellcheck2.png" />
+<Image src={spellcheck2} style={{ backgroundSize: 'auto' }} />
 
 ---
 

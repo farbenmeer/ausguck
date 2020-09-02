@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:8
+      - image: node:lts
     steps:
       - checkout
       - run:
@@ -22,7 +22,7 @@ jobs:
 
   deploy:
     docker:
-      - image: node:8
+      - image: node:lts
     steps:
       - checkout
       - attach_workspace:

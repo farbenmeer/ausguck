@@ -1,6 +1,11 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import serviceWorker from './images/service-worker/sw.jpeg'
+import Lifecycle from './images/service-worker/lifecycle.png'
+import Waiting from './images/service-worker/waiting.png'
 
-export { default as theme } from '../theme'
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Service Worker</title>
@@ -19,7 +24,7 @@ by Tobias Linkohr
 programmable network proxy
 
 ---
-<img src="/images/service-worker/sw.jpeg" />
+<Image src={serviceWorker} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -41,7 +46,7 @@ programmable network proxy
 
 # Lifecycle
 
-<img src="/images/service-worker/lifecycle.png" />
+<Image src={Lifecycle} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -74,7 +79,7 @@ Browser activates the SW after installation
 
 ---
 
-<img src="/images/service-worker/waiting.png" />
+<Image src={Waiting} style={{ backgroundSize: 'auto' }} />
 
 
 ---

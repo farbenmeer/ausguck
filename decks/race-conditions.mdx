@@ -1,6 +1,12 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import linkedList1 from './images/race-conditions/linked_list_1.png'
+import linkedList2 from './images/race-conditions/linked_list_2.png'
+import linkedList3 from './images/race-conditions/linked_list_3.png'
+import singlyLinkedList from './images/race-conditions/Singly-linked-list.svg'
 
-export { default as theme } from '../theme'
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Race Conditions</title>
@@ -63,7 +69,7 @@ Node {
 }
 ```
 
-<img width="1000px" src="/images/race-conditions/Singly-linked-list.svg" />
+<Image style={{ width: '1000px', backgroundSize: 'contain' }} src={singlyLinkedList} />
 
 ---
 
@@ -71,18 +77,18 @@ We want to remove two items from a linked list
 
 ---
 
-<img src="/images/race-conditions/linked_list_1.png" />
+<Image src={linkedList1} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/race-conditions/linked_list_1.png" />  
-<img src="/images/race-conditions/linked_list_2.png" />
+<Image src={linkedList1} style={{ backgroundSize: 'auto' }} />  
+<Image src={linkedList2} style={{ backgroundSize: 'auto' }} />
 
 ---
 
-<img src="/images/race-conditions/linked_list_1.png" />  
-<img src="/images/race-conditions/linked_list_2.png" />  
-<img src="/images/race-conditions/linked_list_3.png" />
+<Image src={linkedList1} style={{ backgroundSize: 'auto' }} />  
+<Image src={linkedList2} style={{ backgroundSize: 'auto' }} />  
+<Image src={linkedList3} style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -125,7 +131,7 @@ This can also affect javascript with async code, a solution for this would be
 
 ---
 
-```
+```js
 redis.get('key', function(err, value) {
     redis.set('key', value * 2);
 });
@@ -142,7 +148,7 @@ user2: redis.set('key', 1 x 2) -> 2
 
 ---
 
-```
+```js
 var AsyncLock = require('async-lock');
 var lock = new AsyncLock();
 
