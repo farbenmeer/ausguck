@@ -1,6 +1,10 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import donts from './images/git-commits-semver/donts.png'
+import semanticReleaseNotes from './images/git-commits-semver/sematic-release-note.png'
 
-export { default as theme } from '../theme'
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Git commits and versioning</title>
@@ -94,7 +98,7 @@ Add age field to all premium users.
 
 # What we do now
 
-<img src="/ausguck/images/git-commits-semver/donts.png" alt="donts" width="800" />
+<Image src={donts} alt="donts" style={{ backgroundSize: 'auto' }} />
 
 ---
 
@@ -134,7 +138,7 @@ PATCH version when you make backwards-compatible bug fixes
 
 # Tooling
 
-<img src="/images/git-commits-semver/sematic-release-note.png" alt="examples" width="800" />
+<Image src={semanticReleaseNotes} alt="examples" style={{ backgroundSize: 'auto' }} />
 
 [semantic-release](https://github.com/semantic-release/semantic-release) generates release note and number on each master merge/pull
 

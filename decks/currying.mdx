@@ -1,6 +1,11 @@
-import { Head } from 'mdx-deck'
+import { Head, Image } from 'mdx-deck'
+import haskellBCurry from './images/currying/HaskellBCurry.jpg'
+import haskellFunction from './images/currying/function.svg'
+import curriedFunction from './images/currying/curriedFunction.svg'
 
-export { default as theme } from '../theme'
+import customTheme from '../theme'
+
+export const theme = customTheme
 
 <Head>
   <title>Currying</title>
@@ -19,19 +24,19 @@ by Max Strübing
 
 ---
 
-<img src="/images/currying/HaskellBCurry.jpg" />
+<Image src={haskellBCurry} style={{ backgroundSize: 'auto' }}/>
 
 <small>Haskell Curry</small>
 
 ---
 
-<img src="/images/currying/function.svg" />
+<Image src={haskellFunction} style={{ backgroundSize: 'auto' }}/>
 
 ---
 
-<img src="/images/currying/function.svg" />
+<Image src={haskellFunction} style={{ backgroundSize: 'auto' }}/>
 <br/>
-<img src="/images/currying/curriedFunction.svg" />
+<Image src={curriedFunction} style={{ backgroundSize: 'auto' }}/>
 
 ---
 
@@ -88,7 +93,7 @@ const add = x => y => x + y;
 const add = (x, y) => x + y;
 ```
 
-<img src="/images/currying/function.svg" />
+<Image src={haskellFunction} style={{ backgroundSize: 'auto' }}/>
 
 ---
 
@@ -96,7 +101,7 @@ const add = (x, y) => x + y;
 const add = x => y => x + y;
 ```
 
-<img src="/images/currying/curriedFunction.svg" />
+<Image src={curriedFunction} style={{ backgroundSize: 'auto' }}/>
 
 ---
 
