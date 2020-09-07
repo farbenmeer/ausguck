@@ -1,6 +1,6 @@
 
 [![CircleCI](https://circleci.com/gh/farbenmeer/ausguck.svg?style=svg)](https://circleci.com/gh/farbenmeer/ausguck)
-[![dependencies Status](https://david-dm.org/farbenmeer/ausguck/master/status.svg)](https://david-dm.org/farbenmeer/ausguck/master)
+[![dependencies Status](https://david-dm.org/farbenmeer/ausguck/main/status.svg)](https://david-dm.org/farbenmeer/ausguck/main)
 [![devDependencies Status](https://david-dm.org/farbenmeer/ausguck/dev-status.svg)](https://david-dm.org/farbenmeer/ausguck?type=dev)
 [![Greenkeeper badge](https://badges.greenkeeper.io/farbenmeer/ausguck.svg)](https://greenkeeper.io/)
 
