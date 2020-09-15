@@ -1,0 +1,225 @@
+import { Head } from 'mdx-deck'
+
+import customTheme from '../theme'
+
+export const theme = customTheme
+
+<Head>
+  <title>Svelte</title>
+  <meta name="author" content="Marcel Hoppe" />
+</Head>
+
+# Svelte
+
+by Marcel Hoppe
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/Kampfheizung))
+
+---
+
+<img style={{ width: '80%' }} src="https://camo.githubusercontent.com/56585f80ea08a4198ab8e226daeca2cfb651bda4/68747470733a2f2f7376656c74656a732e6769746875622e696f2f6173736574732f62616e6e65722e706e67" />
+
+---
+
+Svelte is a component framework like React or Vue
+
+---
+
+![](https://media.giphy.com/media/UsGtz1AaT9qjaysHCB/giphy.gif)
+
+---
+
+But what if this new framework comes up with a decent solution how to handle virtual DOM diffing
+and not eat your frame budget or tax the garbage collector?
+
+---
+
+![](https://media.giphy.com/media/l2YWzPphbDnbhuvqU/giphy.gif)
+
+---
+
+"Svelte runs at **build time** and converting your components into highly efficient imperative code that surgically updates the DOM"
+
+[ ... ] (https://svelte.dev/)
+
+---
+
+But let us take a step back and look at the various advantages of svelte in detail
+
+1. Less code
+2. No virtual DOM
+3. Size
+... A11y, Typesafe, etc.
+
+---
+
+## 1. Less code
+
+---
+
+Let's write a simple app that has 2 numeric inputs and add them together
+
+---
+
+### React
+
+```jsx
+const Component = () => {
+	const [first, setFirst] = useState(2)
+	const [second, setSecond] = useState(3)
+
+	const changeFirst = (e) => setFirst(e.currentTarget.value)
+	const changeSecond = (e) => setSecond(e.currentTarget.value)
+
+	return (
+		<>
+			<input type="number" value={first} onChange={changeFirst} />
+			<input type="number" value={second} onChange={changeSecond} />
+
+			<p>{first} + {second} = {first + second}</p>
+		</>
+	)
+}
+```
+
+---
+
+### Vue
+
+```html
+<template>
+  <div>
+    <input type="number" v-model.number="a">
+    <input type="number" v-model.number="b">
+
+    <p>{{a}} + {{b}} = {{a + b}}</p>
+  </div>
+</template>
+
+<script>
+  export default {
+    data: function() {
+      return {
+        a: 1,
+        b: 2
+      };
+    }
+  };
+</script>
+```
+
+---
+
+### Svelte
+
+```html
+<script>
+	let a = 2;
+	let b = 3;
+</script>
+
+<input type="number" bind:value={a}>
+<input type="number" bind:value={b}>
+
+<p>{a} + {b} = {a + b}</p>
+```
+
+---
+
+### Advantages of Svelte
+
+- No redundant top level elements (like fragments in React or template elements in Vue)
+- Event and value are tightly coupled together and doesn't need to be seperated (like event handler and state values in React)
+- No redundant state api for stateful variables (like useState in React)
+
+---
+
+## 2. No virtual DOM
+
+(https://svelte.dev/blog/virtual-dom-is-pure-overhead)
+
+---
+
+![](https://media.makeameme.org/created/its-like-the-nm48kv.jpg)
+
+---
+
+"This is actually extremely fast, primarily because most DOM operations tend to be slow. There's been a lot of performance work on the DOM, but most DOM operations tend to drop frames."
+
+[ ... ] 2013 Pete Hunt (React core team member)
+
+---
+
+First of all the virtual DOM model is not bad and the performance is *generally good enough*
+and the diffing algorithm by React is extremly fast.
+
+---
+
+## So why we should **NOT** using the virtual DOM?
+
+---
+
+Let's look at some example code in React
+
+```jsx
+function MoreRealisticComponent(props) {
+  const [selected, setSelected] = useState(null);
+
+  return (
+    <div>
+      <p>Selected {selected ? selected.name : 'nothing'}</p>
+
+      <ul>
+        {props.items.map(item =>
+          <li>
+            <button onClick={() => setSelected(item)}>
+              {item.name}
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
+```
+
+---
+
+We're generating a virtual list of buttons each with their own inline event handler – **on every state change**.
+
+Unless you're unhealthily obsessed with performance, you're not going to optimise that. There's no point. It's plenty fast enough. But you know what would be even faster? **Not doing that**.
+
+[ ... ] https://svelte.dev
+
+---
+
+The danger of defaulting to doing unnecessary work, even if that work is trivial, is that your app will eventually succumb to 'death by a thousand cuts' with no clear bottleneck to aim at once it's time to optimise.
+
+---
+
+## 3. Size
+
+---
+
+Due to compiling svelte code to tiny **framework-less** vanilla JS – your App starts and stays fast.
+
+---
+
+# Coding Time
+
+---
+
+## Conclusion
+
+Svelte has a fresh new and fast approach how to handle UI changes and stick to idiomatic syntax but that doesn't mean we need to
+migrate all React or Vue Apps to Svelte. Svelte is just 3 month's old (stable) and don't have a solution for concurrent mode right now but we should
+keep an eye on Svelte to be on the bleeding edge side of coding.
+
+---
+
+Sapper (Next.js for Svelte) ⚡️ talk coming soon...
+
+---
+
+## Thank you for your Attention
+
+![](https://media.giphy.com/media/AeWoyE3ZT90YM/giphy.gif)
