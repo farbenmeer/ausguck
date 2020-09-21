@@ -15,6 +15,7 @@
 * [service-worker](service-worker)
 * [simple-sql-evaluation](simple-sql-evaluation)
 * [solid](solid)
+* [svelte](svelte)
 * [use-effect-hook](use-effect-hook)
 * [web-components](web-components)
 * [web-worker](web-worker)
