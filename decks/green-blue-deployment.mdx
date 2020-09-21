@@ -1,5 +1,3 @@
-import { Head } from 'mdx-deck'
-
 import customTheme from '../theme'
 
 export const theme = customTheme
@@ -98,9 +96,9 @@ Run automated tests on the green stack by calling the pre.myservice.api.com
 
 ---
 
-Register the ELB-Main with the green stack and deregister the older blue stack. 
+Register the ELB-Main with the green stack and deregister the older blue stack.
 
-Once the switch is complete (it is not instant because AWS Connection draining waits for in-flight requests to finish), 
+Once the switch is complete (it is not instant because AWS Connection draining waits for in-flight requests to finish),
 
 production traffic is diverted to the green stack.
 
@@ -143,7 +141,7 @@ Modify the host condition in Listener Rule 2 to main.myservice.api.intuit.com.
 
 ---
 
-Reorder the priority of rules to ensure that Listener Rule 2 takes higher precedence over Listener Rule 1. 
+Reorder the priority of rules to ensure that Listener Rule 2 takes higher precedence over Listener Rule 1.
 
 At this point, your live production traffic will be forwarded to the Green stack as Listener Rule 2 is evaluated first in the order.
 

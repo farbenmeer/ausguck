@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "The decks of our lightning talks at farbenmeer",
   "scripts": {
-    "start": "./bin/run",
-    "build": "./bin/run build",
-    "pdf": "./bin/run pdf",
-    "image": "./bin/run screenshot",
-    "help": "mdx-deck"
+    "dev": "gatsby develop",
+    "clean": "gatsby clean",
+    "build": "gatsby build --prefix-paths",
+    "start": "gatsby serve --prefix-paths"
   },
   "keywords": [],
   "author": "Max Struebing",
@@ -17,8 +16,12 @@
     "url": "https://github.com/farbenmeer/ausguck.git"
   },
   "devDependencies": {
-    "@mdx-deck/themes": "4.1.0",
-    "mdx-deck": "4.1.1",
+    "gatsby": "2.24.63",
+    "gatsby-plugin-catch-links": "2.3.12",
+    "gatsby-theme-mdx-deck": "4.1.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-helmet": "6.1.0",
     "react-syntax-highlighter": "13.5.3"
   }
 }
