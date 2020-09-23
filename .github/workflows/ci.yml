@@ -23,13 +23,13 @@ jobs:
         run: npm ci
 
       - name: Build pages
-        run: bin/create_decks
+        run: npm run build
 
       - name: Upload decks
         uses: actions/upload-artifact@v2
         with:
           name: ausguck
-          path: ausguck
+          path: public
 
   deploy:
     runs-on: ubuntu-latest

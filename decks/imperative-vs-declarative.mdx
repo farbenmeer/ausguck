@@ -1,5 +1,3 @@
-import { Head } from 'mdx-deck'
-
 import customTheme from '../theme'
 
 export const theme = customTheme
@@ -97,7 +95,7 @@ container.appendChild(btn);
 const Button = () => {
   const [color, setColor] = useState('red')
   return (
-    <button 
+    <button
       className={`btn`}
       onClick={(event) => setColor(color === 'red' ? 'blue' : 'red')}
     />
