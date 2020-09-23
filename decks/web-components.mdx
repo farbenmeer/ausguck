@@ -1,4 +1,3 @@
-import { Head } from 'mdx-deck'
 import customTheme from '../theme'
 
 export const theme = customTheme
@@ -9,7 +8,7 @@ export const theme = customTheme
 
 # Web Components
 
-by Max Strübing  
+by Max Strübing
 ([twitter](https://twitter.com/mxstrbng), [github](https://github.com/mstruebing))
 
 ---
@@ -38,16 +37,16 @@ A set of JS-APIs to define your custom components and their behaviour
 
 ---
 
-## Shadow DOM 
+## Shadow DOM
 
-API to encapsulate an own DOM-tree to your custom component without 
+API to encapsulate an own DOM-tree to your custom component without
 interferring with the main-DOM.
 
 ---
 
 ## HTML templates
 
-`<template>`: is not rendered in the DOM but can be referenced via JS  
+`<template>`: is not rendered in the DOM but can be referenced via JS
 `<slot>`: inject other components into your own component.
 
 ---
@@ -96,32 +95,32 @@ You can also extend other custom components.
 
 ---
 
-### `connectedCallback` 
+### `connectedCallback`
 
-- the element has been inserted into the DOM 
+- the element has been inserted into the DOM
 - `componentDidMount`
 
 ---
 
-### `disconnectedCallback` 
+### `disconnectedCallback`
 
-- the element has been removed from the DOM 
-- right after `componentWillUnmount` 
+- the element has been removed from the DOM
+- right after `componentWillUnmount`
 
 ---
- 
-### `attributeChangedCallback` 
 
-- everytime a passed property changes 
+### `attributeChangedCallback`
+
+- everytime a passed property changes
 - *which is observed
 
 ---
 
-## Lifecycle order 
+## Lifecycle order
 
-1. `constructor` 
-2. `attributeChangedCallback` 
-3. `connectedCallback` 
+1. `constructor`
+2. `attributeChangedCallback`
+3. `connectedCallback`
 4. `disconnectedCallback`
 
 ---
@@ -133,9 +132,9 @@ constructor() {
   super(); // is mandatory
 
   // needed to use the shadow dom
-  this.attachShadow({mode: 'open'}); 
+  this.attachShadow({mode: 'open'});
 
-  this.shadowRoot.innerHTML = 
+  this.shadowRoot.innerHTML =
     `<p>the HTML inside the shadow DOM</p>`;
 }
 ```
@@ -236,8 +235,8 @@ this.shadowRoot.innerHTML = `
 ```js
 this.shadowRoot.innerHTML = `
         <style>
-            :host { 
-                text-transform: uppercase; 
+            :host {
+                text-transform: uppercase;
             }
         </style>
         // ... HTML
@@ -246,7 +245,7 @@ this.shadowRoot.innerHTML = `
 
 ---
 
-```js 
+```js
 this.shadowRoot.innerHTML = `
     <style>
         @import "https://my-cool-url/stylesheet.css";
@@ -330,7 +329,7 @@ document.querySelector('my-element')
 
 ---
 
-## Extending native elements 
+## Extending native elements
 
 ---
 
