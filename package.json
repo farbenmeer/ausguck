@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "The decks of our lightning talks at farbenmeer",
   "scripts": {
-    "dev": "gatsby develop",
+    "dev": "bin/build-index.sh && gatsby develop",
     "clean": "gatsby clean",
-    "build": "gatsby build --prefix-paths",
+    "build": "bin/build-index.sh && gatsby build --prefix-paths",
     "start": "gatsby serve --prefix-paths"
   },
   "keywords": [],
