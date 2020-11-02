@@ -16,7 +16,7 @@
     "url": "https://github.com/farbenmeer/ausguck.git"
   },
   "devDependencies": {
-    "gatsby": "2.24.91",
+    "gatsby": "2.25.1",
     "gatsby-plugin-catch-links": "2.3.15",
     "gatsby-theme-mdx-deck": "4.1.0",
     "react": "16.14.0",
