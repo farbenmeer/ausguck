@@ -6,7 +6,11 @@
     "dev": "bin/build-index.sh && gatsby develop",
     "clean": "gatsby clean",
     "build": "bin/build-index.sh && gatsby build --prefix-paths",
-    "start": "gatsby serve --prefix-paths"
+    "start": "gatsby serve --prefix-paths",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test dev http://localhost:8000 cy:open",
+    "test:e2e:ci": "start-server-and-test dev http://localhost:8000 cy:run"
   },
   "keywords": [],
   "author": "Max Struebing",
@@ -16,12 +20,14 @@
     "url": "https://github.com/farbenmeer/ausguck.git"
   },
   "devDependencies": {
+    "cypress": "6.6.0",
     "gatsby": "2.32.11",
     "gatsby-plugin-catch-links": "2.10.0",
     "gatsby-theme-mdx-deck": "4.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-helmet": "6.1.0",
-    "react-syntax-highlighter": "15.4.3"
+    "react-syntax-highlighter": "15.4.3",
+    "start-server-and-test": "1.12.0"
   }
 }

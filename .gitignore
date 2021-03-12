@@ -3,3 +3,7 @@ node_modules
 ausguck/
 public
 .cache
+
+# cypress
+cypress/screenshots
+cypress/videos
