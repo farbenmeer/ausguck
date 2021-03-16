@@ -21,8 +21,8 @@
   },
   "devDependencies": {
     "cypress": "6.7.1",
-    "gatsby": "2.32.11",
-    "gatsby-plugin-catch-links": "2.10.0",
+    "gatsby": "3.1.0",
+    "gatsby-plugin-catch-links": "3.1.0",
     "gatsby-theme-mdx-deck": "4.1.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
