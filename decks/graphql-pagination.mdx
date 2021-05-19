@@ -1,0 +1,345 @@
+import customTheme from '../theme'
+
+export const theme = customTheme
+
+<Head>
+  <title>Graphql pagination</title>
+  <meta name="author" content="Marcel" />
+</Head>
+
+# Pagination with GraphQL and a postgres DB
+
+by Marcel Hoppe
+([twitter](https://twitter.com/m_hope5), [github](https://github.com/Kampfheizung))
+
+---
+
+### Where do we come from?
+
+<img src="https://media.giphy.com/media/11PoCVGkSg46Iw/giphy.gif" />
+
+---
+
+### Firestore to the rescue 🚀
+
+---
+
+<img style={{ width: '70%' }} src="https://media.giphy.com/media/Kx7Ramdh3yRmGlIt0W/giphy.gif" />
+
+---
+
+### Postgres to the rescue 🚀
+
+---
+
+### Client side vs Server side pagination
+
+---
+
+### Client side pagination is better for
+
+- Small data set
+- Faster subsequent page loads
+- Sort & Filter requirements supported fully (unless results greater than max size)
+
+---
+
+### Server side pagination is better for
+
+- Large data set
+- Faster initial page load
+- Complex view business logic
+- Resilience to concurrent changes
+
+---
+
+### Our starting point
+
+- Large data set
+- Complex business logic
+
+---
+
+### So let's start with server side pagination but how to paginate on the server?
+
+<img style={{ width: '70%' }} src="https://media.giphy.com/media/FxufOs6bQwxO0/giphy.gif" />
+
+---
+
+### Implement the GraphQL Cursor Connection specification from Relay
+
+https://relay.dev/graphql/connections.htm
+
+---
+
+### Forward pagination
+
+`first`: takes a non-negative integer
+
+`after`: takes the cursor type as described in the cursor field section
+
+```graphql
+{
+    friends(first: 2, after: "uniqueCursor") {
+        totalCount
+        edges {
+            node {
+                name
+            }
+            cursor
+        }
+        pageInfo {
+            endCursor
+            hasNextPage
+        }
+    }
+}
+```
+
+---
+
+### Backwards pagination
+
+`last`: takes a non-negative integer
+
+`before`: takes the cursor type as described in the cursor field section
+
+```graphql
+{
+    friends(last: 2, before: "uniqueCursor") {
+        totalCount
+        edges {
+            node {
+                name
+            }
+            cursor
+        }
+        pageInfo {
+            endCursor
+            hasPreviousPage
+        }
+    }
+}
+```
+
+---
+
+### Example Dataset (Software Engineers 👩🏽‍💻)
+
+<table style={{ width: '200px' }}>
+    <thead>
+        <th>id</th>
+        <th>name</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>alice</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>franci</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>angelina</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>ornella</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>cruella</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>pauline</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>frederique</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>betül</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>weiping</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>alex</td>
+        </tr>
+    </tbody>
+</table>
+
+---
+
+### How to resolve forward pagination?
+
+---
+
+`first: 2`
+
+`after: 6`
+
+```sql
+SELECT name
+FROM friends
+WHERE id > 6
+ORDER BY id ASC
+LIMIT 3;
+```
+
+---
+
+## Question time
+
+Why `LIMIT 3`?
+
+---
+
+## Answer
+
+For `hasNextPage` we need to know if we have another item on the next page
+
+---
+
+```js
+return {
+    totalCount: friends.length - 1,
+    edges: friends.slice(0, -1).map(friend => (
+        { cursor: friend.id, node: { name: friend.name } }
+    )),
+    pageInfo: {
+        endCursor: friends[-1].id
+        hasNextPage: friends.length > args.first
+    }
+}
+```
+
+---
+
+```json
+{
+    "data": {
+        "friend": {
+            "totalCount": "2",
+            "edges": [
+                {
+                    "node": {
+                        "name": "frederique"
+                    },
+                    "cursor": 7
+                },
+                {
+                    "node": {
+                        "name": "betül"
+                    },
+                    "cursor": 8
+                }
+            ],
+            "pageInfo": {
+                "endCursor": 8,
+                "hasNextPage": true
+            }
+        }
+    }
+}
+```
+
+---
+
+### How to resolve backward pagination?
+
+---
+
+`last: 2`
+
+`before: 6`
+
+`offset`: cursor - last - 1
+
+```sql
+SELECT name
+FROM friends
+WHERE id < 6
+ORDER BY id ASC
+LIMIT 3
+OFFSET 3;
+```
+
+---
+
+### Question time
+
+What if i have uuid's instead of incremental id's?
+
+---
+
+### Answer
+
+Use the window function `row_number()` from postgresql to simulate an incremental id besides the uuids
+
+---
+
+```js
+return {
+    totalCount: friends.length - 1,
+    edges: friends.slice(1).map(friend => (
+        { cursor: friend.id, node: { name: friend.name } }
+    )),
+    pageInfo: {
+        endCursor: friends[-1].id
+        hasPreviousPage: friends.length > args.last
+    }
+}
+```
+
+---
+
+```json
+{
+    "data": {
+        "friend": {
+            "totalCount": "2",
+            "edges": [
+                {
+                    "node": {
+                        "name": "ornella"
+                    },
+                    "cursor": 4
+                },
+                {
+                    "node": {
+                        "name": "cruella"
+                    },
+                    "cursor": 5
+                }
+            ],
+            "pageInfo": {
+                "endCursor": 5,
+                "hasPreviousPage": true
+            }
+        }
+    }
+}
+```
+
+---
+
+### Challenges that we mastered
+
+- Custom ordering of columns
+- Filtering
+- UUID's instead of numbered id's
+
+---
+
+Hit me if you have any questions or need help 🙂
+
+Thanks for your patience
+
+<img src="https://media.giphy.com/media/m9eG1qVjvN56H0MXt8/giphy.gif" />
