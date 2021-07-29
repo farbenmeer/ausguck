@@ -20,7 +20,7 @@
     "url": "https://github.com/farbenmeer/ausguck.git"
   },
   "devDependencies": {
-    "cypress": "8.0.0",
+    "cypress": "8.1.0",
     "gatsby": "3.10.2",
     "gatsby-plugin-catch-links": "3.10.0",
     "gatsby-theme-mdx-deck": "4.1.0",
