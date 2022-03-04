@@ -24,7 +24,7 @@ jobs:
         run: npm run build
 
       - name: Upload decks
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ausguck
           path: public
@@ -47,13 +47,13 @@ jobs:
       - name: Run Cypress
         run: npm run test:e2e:ci
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: chrome-cypress-screenshots
           path: cypress/screenshots
       # Test run video was always captured, so this action uses "always()" condition
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: chrome-cypress-videos
