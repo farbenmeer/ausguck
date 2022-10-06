@@ -1,0 +1,309 @@
+import customTheme from "../theme";
+export const theme = customTheme;
+
+<Head>
+  <title>E2E typings with next-fetch and SWR</title>
+  <meta name="author" content="Roman Ernst" />
+</Head>
+
+# E2E typings with next-fetch and SWR
+
+by Roman Ernst
+([github](https://github.com/pex))
+
+---
+
+# React-style fetching
+
+```jsx
+function SomeComponent() {
+  const [data, setData] = useState<DataType>();
+
+  useEffect(() => {
+    const fetcher = async () => {
+      const data = await fetch("/api/data");
+      const json = (await data.json()) as DataType;
+      setData(data);
+    };
+    fetcher();
+  }, []);
+
+  return <div>{data ? data.name : "Loading"}</div>;
+}
+```
+
+---
+
+# Remember how types are applied here
+
+```ts
+const [data, setData] = useState<DataType>();
+// ...
+const json = (await data.json()) as DataType;
+```
+
+---
+
+# And what about errors?
+
+---
+
+```ts
+const [error, setError] = useState<Error>()
+
+try { ... } catch (error) {
+  setError(error)
+}
+```
+
+---
+
+# SWR to the rescue
+
+```ts
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+function SomeComponent() {
+  const { data, error } = useSWR("/api/data", fetcher);
+}
+```
+
+---
+
+# Okay. But our types got lost!
+
+---
+
+# SWR having a typed fetcher
+
+```ts
+const fetcher: Fetcher<User, string> = (id) => getUserById(id);
+```
+
+---
+
+# Somehow this feels odd 🤷‍♀️
+
+- Where do types actully come from?
+- We know our data stucture from API routes
+- Why do we have to handle them manually?
+- So much boilerplate.
+
+---
+
+# tRPC 🤘
+
+```ts
+const { data } = trpc.greeting.useQuery();
+```
+
+## 😍
+
+---
+
+# tRPC on the server
+
+```ts
+import { initTRPC } from "@trpc/server";
+import * as trpcNext from "@trpc/server/adapters/next";
+import { z } from "zod";
+
+const t = initTRPC.create();
+
+const appRouter = t.router({
+  greeting: t.procedure
+    .input(
+      z.object({
+        name: z.string().nullish(),
+      })
+    )
+    .query(({ input }) => {
+      return {
+        text: `hello ${input?.name ?? "world"}`,
+      };
+    }),
+});
+```
+
+---
+
+# Router, Procedure, RPC? Rlly?
+
+---
+
+# Here comes next-fetch
+
+## Finally.
+
+---
+
+## Next-fetch
+
+# The client
+
+```ts
+const { data, error } = useData();
+```
+
+## 😍
+
+---
+
+## Next-fetch
+
+# The server
+
+```ts
+export const useData = query(async function () {
+  return { some: "data" };
+});
+```
+
+## 😍
+
+---
+
+# You forgot the types! 🙈
+
+---
+
+# Types are imported alongside the hook
+
+```ts
+import { useData } from "/api/data.swr";
+```
+
+is fully typed! And this test will succeeed:
+
+```ts
+type test = Expect<Equal<data, { some: string }>>;
+```
+
+---
+
+# That easy?
+
+---
+
+# Yes.
+
+**Background note**: this is done by compiling files with an `swr.ts` ending to custom API routes.
+
+---
+
+## I see 👌
+
+# How about passing arguments?
+
+---
+
+# Easy.
+
+```ts
+// Client
+const { data, error } = useData({ foo: "bar" });
+```
+
+```ts
+// Server
+export const useData = query(
+  z.object({ foo: z.string() }),
+  async function ({ foo }) {
+    return { some: foo }; // foo is now guaranteed to be a typeof string
+  }
+);
+```
+
+---
+
+# Does this also work for mutations?
+
+---
+
+## Sure.
+
+# Mutations look very similar:
+
+```ts
+export const useCreateData = mutation(
+  z.object({ foo: z.string() }),
+  async function ({ foo }) {
+    // ... do some DB operations ...
+    return { some: foo };
+  }
+);
+```
+
+---
+
+# Mutations on the client
+
+## Using `next-fetch/Form`
+
+```tsx
+const createData = useCreateData();
+
+return (
+  <Form mutation={createData}>
+    <input type="text" name="some" />
+  </Form>
+);
+```
+
+---
+
+# Mutations on the client
+
+## Using trigger
+
+```tsx
+const createData = useCreateData();
+
+return <button onClick={() => createData.trigger({ some: "data" })} />;
+```
+
+---
+
+# Looks nice!
+
+# Though this is not very optistic.
+
+---
+
+# Optimistic updates at your findertips
+
+```jsx
+function DataList() {
+  const { data, mutate } = useData();
+  const createData = useCreateData();
+
+  function handleButtonClick() {
+    const data = { some: "data" };
+    createData.trigger(data); // We could also `await` this
+    mutate([...data, data]); // Optimistic update
+  }
+
+  return (
+    <>
+      <ul>
+        {data.list.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
+      <button onClick={handleButtonClick} />
+    </>
+  );
+}
+```
+
+---
+
+# Check it out:
+
+🐙
+
+https://github.com/vercel-labs/next-fetch/
+
+# Questions
+
+## 🙋‍♀️
